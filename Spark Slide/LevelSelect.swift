@@ -20,39 +20,51 @@ class LevelSelect: UIViewController {
     
     @IBAction func levelOne(_ sender: UIButton) {
         LevelSelect.preset = 1
+        
     }
     
     @IBAction func levelTwo(_ sender: UIButton) {
+        LevelSelect.preset = 2
     }
     
     @IBAction func levelThree(_ sender: UIButton) {
+        LevelSelect.preset = 3
     }
     
     @IBAction func levelFour(_ sender: UIButton) {
+        LevelSelect.preset = 4
     }
     
     @IBAction func levelFive(_ sender: UIButton) {
+        LevelSelect.preset = 5
     }
     
     @IBAction func levelSix(_ sender: UIButton) {
+        LevelSelect.preset = 6
     }
     
     @IBAction func levelSeven(_ sender: UIButton) {
+        LevelSelect.preset = 7
     }
     
     @IBAction func levelEight(_ sender: UIButton) {
+        LevelSelect.preset = 8
     }
     
     @IBAction func levelNine(_ sender: UIButton) {
+        LevelSelect.preset = 9
     }
     
     @IBAction func levelTen(_ sender: UIButton) {
+        LevelSelect.preset = 10
     }
     
     @IBAction func levelEleven(_ sender: UIButton) {
+        LevelSelect.preset = 11
     }
     
     @IBAction func levelTwelve(_ sender: UIButton) {
+        LevelSelect.preset = 12
     }
     
     

@@ -23,6 +23,7 @@ class GameScene: SKScene {
 
     
     override func didMove(to view: SKView) {
+        levelSetup()
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
         yellowTriangle = self.childNode(withName: "yellowTriangle") as? SKSpriteNode
@@ -67,6 +68,17 @@ class GameScene: SKScene {
 
         let vector = CGVector(dx: vectorX, dy: vectorY)
         greyCircle?.physicsBody?.applyForce(vector)
+    }
+    
+    func levelSetup(){
+        if(LevelSelect.preset == 1) {
+            greyCircle?.anchorPoint.x = 0
+            greyCircle?.anchorPoint.y = 429
+            yellowTriangle?.anchorPoint.x = -275
+            yellowTriangle?.anchorPoint.y = 0
+            redSquare?.anchorPoint.x = 275
+            redSquare?.anchorPoint.y = 0
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
