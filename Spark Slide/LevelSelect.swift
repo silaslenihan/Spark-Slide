@@ -19,6 +19,7 @@ class LevelSelect: UIViewController {
     }
     
     @IBAction func levelOne(_ sender: UIButton) {
+        LevelSelect.preset = 1
     }
     
     @IBAction func levelTwo(_ sender: UIButton) {
