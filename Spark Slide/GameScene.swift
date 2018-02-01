@@ -22,7 +22,11 @@ class GameScene: SKScene {
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
-    var shapesNeeded: Int = 0
+    
+    var redScored:Bool = false
+    var yellowScored:Bool = false
+    var numShapes:Int = 0
+    
 
     
     override func didMove(to view: SKView) {
@@ -41,7 +45,6 @@ class GameScene: SKScene {
         redSquare?.physicsBody?.mass = 0.005
         yellowTriangle?.physicsBody?.mass = 0.01
     }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         touchBegan = pos
@@ -80,7 +83,7 @@ class GameScene: SKScene {
         greyCircle?.anchorPoint.y = 429
         
         if(LevelSelect.preset == 1) {
-            shapesNeeded = 2
+            numShapes = 2
             yellowTriangle?.anchorPoint.x = -275
             yellowTriangle?.anchorPoint.y = 0
             redSquare?.anchorPoint.x = 275
@@ -145,8 +148,36 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        var redYes: Bool = true
+        var yellowYes:Bool = true
+        if(redYes) {
+            if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
+                redSquare?.isHidden = true
+                redSquare?.physicsBody?.isDynamic = false
+                redScored = true
+            }
+        }
+        if(yellowYes) {
+            if(yellowTriangle?.physicsBody?.allContactedBodies().contains((yellowGoal?.physicsBody)!))! {
+                yellowTriangle?.isHidden = true
+                yellowTriangle?.physicsBody?.isDynamic = false
+                yellowScored = true
+            }
+        }
+        
+        if(redScored && redYes)
+        {
+            numShapes -= 1
+            redYes = false
+        }
+        if(yellowScored && yellowYes)
+        {
+            numShapes -= 1
+            yellowYes = false
+        }
+        
+        if(numShapes == 0) {
+            
+        }
     }
-    
-   
 }
