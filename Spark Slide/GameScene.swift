@@ -19,6 +19,7 @@ class GameScene: SKScene {
     var yellowTriangle: SKSpriteNode?
     var yellowGoal: SKSpriteNode?
     var redGoal: SKSpriteNode?
+    var nextLevelIcon: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -36,6 +37,7 @@ class GameScene: SKScene {
         yellowTriangle = self.childNode(withName: "yellowTriangle") as? SKSpriteNode
         yellowGoal = self.childNode(withName: "yellowGoal") as? SKSpriteNode
         redGoal = self.childNode(withName: "redGoal") as? SKSpriteNode
+        nextLevelIcon = self.childNode(withName: "nextLevelIcon") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -78,51 +80,11 @@ class GameScene: SKScene {
         greyCircle?.physicsBody?.applyForce(vector)
     }
     
-    func levelSetup(){
-        greyCircle?.anchorPoint.x = 0
-        greyCircle?.anchorPoint.y = 429
+    func nextLevel() {
         
-        if(LevelSelect.preset == 1) {
-            numShapes = 2
-            yellowTriangle?.anchorPoint.x = -275
-            yellowTriangle?.anchorPoint.y = 0
-            redSquare?.anchorPoint.x = 275
-            redSquare?.anchorPoint.y = 0
-        }
-        if(LevelSelect.preset == 2) {
-            
-        }
-        if(LevelSelect.preset == 3) {
-            
-        }
-        if(LevelSelect.preset == 4) {
-            
-        }
-        if(LevelSelect.preset == 5) {
-            
-        }
-        if(LevelSelect.preset == 6) {
-            
-        }
-        if(LevelSelect.preset == 7) {
-            
-        }
-        if(LevelSelect.preset == 8) {
-            
-        }
-        if(LevelSelect.preset == 9) {
-            
-        }
-        if(LevelSelect.preset == 10) {
-            
-        }
-        if(LevelSelect.preset == 11) {
-            
-        }
-        if(LevelSelect.preset == 12) {
-            
-        }
     }
+    
+   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let label = self.label {
@@ -177,6 +139,52 @@ class GameScene: SKScene {
         }
         
         if(numShapes == 0) {
+            nextLevel()
+        }
+    }
+    
+    func levelSetup(){
+        greyCircle?.anchorPoint.x = 0
+        greyCircle?.anchorPoint.y = 429
+        
+        if(LevelSelect.preset == 1) {
+            numShapes = 2
+            yellowTriangle?.anchorPoint.x = -275
+            yellowTriangle?.anchorPoint.y = 0
+            redSquare?.anchorPoint.x = 275
+            redSquare?.anchorPoint.y = 0
+        }
+        if(LevelSelect.preset == 2) {
+            
+        }
+        if(LevelSelect.preset == 3) {
+            
+        }
+        if(LevelSelect.preset == 4) {
+            
+        }
+        if(LevelSelect.preset == 5) {
+            
+        }
+        if(LevelSelect.preset == 6) {
+            
+        }
+        if(LevelSelect.preset == 7) {
+            
+        }
+        if(LevelSelect.preset == 8) {
+            
+        }
+        if(LevelSelect.preset == 9) {
+            
+        }
+        if(LevelSelect.preset == 10) {
+            
+        }
+        if(LevelSelect.preset == 11) {
+            
+        }
+        if(LevelSelect.preset == 12) {
             
         }
     }

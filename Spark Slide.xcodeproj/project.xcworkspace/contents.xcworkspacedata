@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Spark Slide.xcodeproj">
+      location = "group:/Users/silaslenihan/Desktop/Post-AP/Spark Slide/Spark Slide/Assets.xcassets">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
