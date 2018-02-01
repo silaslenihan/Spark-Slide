@@ -43,8 +43,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelOne:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Rfe-Fn-Qgb"/>
-                                                    <segue destination="BV1-FR-VrT" kind="show" id="4Sj-mM-O8L"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Ekx-Oj-JZB"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="gvS-gV-vxr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-mB-Qsf">
@@ -54,7 +54,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelTwo:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Pp6-b7-2d4"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="nDz-rB-vd4"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="LuB-MO-5N0"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zne-GL-xpN">
@@ -64,7 +65,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelThree:" destination="HRf-4F-sBL" eventType="touchUpInside" id="MGe-Nh-e8y"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="R2A-4V-wxw"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="Wll-BP-T7o"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -79,7 +81,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelFour:" destination="HRf-4F-sBL" eventType="touchUpInside" id="nFf-BI-9pu"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Ino-eP-ETz"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="AJt-r9-OyD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaZ-80-XFe">
@@ -89,7 +92,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelFive:" destination="HRf-4F-sBL" eventType="touchUpInside" id="b3L-SX-BQR"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="2ta-pp-Tbt"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="7Lo-VV-8cO"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qx1-fl-nFr">
@@ -99,7 +103,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelSix:" destination="HRf-4F-sBL" eventType="touchUpInside" id="f1w-CJ-byZ"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Z43-AI-xKg"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="fwU-Z6-EbE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -114,7 +119,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelSeven:" destination="HRf-4F-sBL" eventType="touchUpInside" id="sv7-ao-FTl"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="z0j-10-VGa"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="VAx-ZR-vdJ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qn6-za-Llh">
@@ -124,7 +130,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelEight:" destination="HRf-4F-sBL" eventType="touchUpInside" id="1cN-ZI-ReH"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="jur-cQ-Nf5"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="dH5-1h-ndu"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVT-1g-Zof">
@@ -134,7 +141,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelNine:" destination="HRf-4F-sBL" eventType="touchUpInside" id="yy2-cH-uhM"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="pmx-O6-rmy"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="xUf-KY-Ow2"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -149,7 +157,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelTen:" destination="HRf-4F-sBL" eventType="touchUpInside" id="cfV-Hd-7sW"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="IVw-xJ-OwL"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="h8O-fC-axX"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cL-3X-iE6">
@@ -159,7 +168,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelEleven:" destination="HRf-4F-sBL" eventType="touchUpInside" id="DIN-zG-usS"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="xcs-EH-8p5"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="sh8-ds-rMC"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vxa-mH-Xq1">
@@ -169,7 +179,8 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="levelTwelve:" destination="HRf-4F-sBL" eventType="touchUpInside" id="OfH-0y-XAu"/>
+                                                    <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="AkX-zb-OXE"/>
+                                                    <segue destination="BV1-FR-VrT" kind="show" id="Tfh-og-arF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -180,6 +191,20 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="zKF-H2-k3N"/>
                     </view>
+                    <connections>
+                        <outlet property="levelEight" destination="Qn6-za-Llh" id="xuR-CA-0sY"/>
+                        <outlet property="levelEleven" destination="2cL-3X-iE6" id="5D4-k8-a5r"/>
+                        <outlet property="levelFive" destination="JaZ-80-XFe" id="ilX-eZ-1rL"/>
+                        <outlet property="levelFour" destination="Yag-qt-Da3" id="77L-JL-7fg"/>
+                        <outlet property="levelNine" destination="FVT-1g-Zof" id="nEp-cC-Og3"/>
+                        <outlet property="levelOne" destination="2op-Dn-kKs" id="QyD-Vn-0A3"/>
+                        <outlet property="levelSeven" destination="Vfe-wG-HRa" id="saw-5v-yzY"/>
+                        <outlet property="levelSix" destination="qx1-fl-nFr" id="Sif-bi-Udc"/>
+                        <outlet property="levelTen" destination="sSb-Gc-P2y" id="95M-H4-p3o"/>
+                        <outlet property="levelThree" destination="2op-Dn-kKs" id="Fcp-HC-mhG"/>
+                        <outlet property="levelTwelve" destination="Vxa-mH-Xq1" id="tTk-6L-8PQ"/>
+                        <outlet property="levelTwo" destination="2op-Dn-kKs" id="elp-zZ-qLJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8s-N4-Ods" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -262,4 +287,7 @@
             <point key="canvasLocation" x="192.80000000000001" y="890.10494752623697"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="VAx-ZR-vdJ"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -79,6 +79,39 @@ class GameScene: SKScene {
             redSquare?.anchorPoint.x = 275
             redSquare?.anchorPoint.y = 0
         }
+        if(LevelSelect.preset == 2) {
+            
+        }
+        if(LevelSelect.preset == 3) {
+            
+        }
+        if(LevelSelect.preset == 4) {
+            
+        }
+        if(LevelSelect.preset == 5) {
+            
+        }
+        if(LevelSelect.preset == 6) {
+            
+        }
+        if(LevelSelect.preset == 7) {
+            
+        }
+        if(LevelSelect.preset == 8) {
+            
+        }
+        if(LevelSelect.preset == 9) {
+            
+        }
+        if(LevelSelect.preset == 10) {
+            
+        }
+        if(LevelSelect.preset == 11) {
+            
+        }
+        if(LevelSelect.preset == 12) {
+            
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -17,56 +17,61 @@ class LevelSelect: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
         
     }
+   
     
-    @IBAction func levelOne(_ sender: UIButton) {
+    
+    @IBAction func levelSelecter(_ sender: UIButton) {
+    if sender.currentTitle == "levelOne" {
         LevelSelect.preset = 1
+    }
+    if sender.currentTitle == "levelTwo" {
+        LevelSelect.preset = 2
+    }
+    if sender.currentTitle == "levelThree" {
+        LevelSelect.preset = 3
+    }
+    if sender.currentTitle == "levelFour" {
+        LevelSelect.preset = 4
+    }
+    if sender.currentTitle == "levelFive" {
+        LevelSelect.preset = 5
+    }
+    if sender.currentTitle == "levelSix" {
+        LevelSelect.preset = 6
+    }
+    if sender.currentTitle == "levelSeven" {
+        LevelSelect.preset = 7
+    }
+    if sender.currentTitle == "levelEight" {
+        LevelSelect.preset = 8
+    }
+    if sender.currentTitle == "levelNine" {
+        LevelSelect.preset = 9
+    }
+    if sender.currentTitle == "levelTen" {
+        LevelSelect.preset = 10
+    }
+    if sender.currentTitle == "levelEleven" {
+        LevelSelect.preset = 11
+    }
+    if sender.currentTitle == "levelTwelve" {
+        LevelSelect.preset = 12
+    }
         
     }
     
-    @IBAction func levelTwo(_ sender: UIButton) {
-        LevelSelect.preset = 2
-    }
-    
-    @IBAction func levelThree(_ sender: UIButton) {
-        LevelSelect.preset = 3
-    }
-    
-    @IBAction func levelFour(_ sender: UIButton) {
-        LevelSelect.preset = 4
-    }
-    
-    @IBAction func levelFive(_ sender: UIButton) {
-        LevelSelect.preset = 5
-    }
-    
-    @IBAction func levelSix(_ sender: UIButton) {
-        LevelSelect.preset = 6
-    }
-    
-    @IBAction func levelSeven(_ sender: UIButton) {
-        LevelSelect.preset = 7
-    }
-    
-    @IBAction func levelEight(_ sender: UIButton) {
-        LevelSelect.preset = 8
-    }
-    
-    @IBAction func levelNine(_ sender: UIButton) {
-        LevelSelect.preset = 9
-    }
-    
-    @IBAction func levelTen(_ sender: UIButton) {
-        LevelSelect.preset = 10
-    }
-    
-    @IBAction func levelEleven(_ sender: UIButton) {
-        LevelSelect.preset = 11
-    }
-    
-    @IBAction func levelTwelve(_ sender: UIButton) {
-        LevelSelect.preset = 12
-    }
-    
+    @IBOutlet weak var levelOne: UIStackView!
+    @IBOutlet weak var levelTwo: UIStackView!
+    @IBOutlet weak var levelThree: UIStackView!
+    @IBOutlet weak var levelFour: UIButton!
+    @IBOutlet weak var levelFive: UIButton!
+    @IBOutlet weak var levelSix: UIButton!
+    @IBOutlet weak var levelSeven: UIButton!
+    @IBOutlet weak var levelEight: UIButton!
+    @IBOutlet weak var levelNine: UIButton!
+    @IBOutlet weak var levelTen: UIButton!
+    @IBOutlet weak var levelEleven: UIButton!
+    @IBOutlet weak var levelTwelve: UIButton!
     
     
     
