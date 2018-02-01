@@ -17,9 +17,12 @@ class GameScene: SKScene {
     var redSquare: SKSpriteNode?
     var greyCircle: SKSpriteNode?
     var yellowTriangle: SKSpriteNode?
+    var yellowGoal: SKSpriteNode?
+    var redGoal: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
+    var shapesNeeded: Int = 0
 
     
     override func didMove(to view: SKView) {
@@ -27,6 +30,8 @@ class GameScene: SKScene {
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
         yellowTriangle = self.childNode(withName: "yellowTriangle") as? SKSpriteNode
+        yellowGoal = self.childNode(withName: "yellowGoal") as? SKSpriteNode
+        redGoal = self.childNode(withName: "redGoal") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -71,9 +76,11 @@ class GameScene: SKScene {
     }
     
     func levelSetup(){
+        greyCircle?.anchorPoint.x = 0
+        greyCircle?.anchorPoint.y = 429
+        
         if(LevelSelect.preset == 1) {
-            greyCircle?.anchorPoint.x = 0
-            greyCircle?.anchorPoint.y = 429
+            shapesNeeded = 2
             yellowTriangle?.anchorPoint.x = -275
             yellowTriangle?.anchorPoint.y = 0
             redSquare?.anchorPoint.x = 275

@@ -15,7 +15,6 @@ class LevelSelect: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
-        
     }
    
     
@@ -72,7 +71,4 @@ class LevelSelect: UIViewController {
     @IBOutlet weak var levelTen: UIButton!
     @IBOutlet weak var levelEleven: UIButton!
     @IBOutlet weak var levelTwelve: UIButton!
-    
-    
-    
 }
