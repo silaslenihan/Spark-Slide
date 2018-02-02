@@ -26,12 +26,14 @@ class GameScene: SKScene {
     
     var redScored:Bool = false
     var yellowScored:Bool = false
-    var numShapes:Int = 0
+    var numShapes:Int = 2
+    var levelButton:Bool = false
+    
+   
     
 
     
     override func didMove(to view: SKView) {
-        levelSetup()
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
         yellowTriangle = self.childNode(withName: "yellowTriangle") as? SKSpriteNode
@@ -46,6 +48,12 @@ class GameScene: SKScene {
         greyCircle?.physicsBody?.mass = 0.01
         redSquare?.physicsBody?.mass = 0.005
         yellowTriangle?.physicsBody?.mass = 0.01
+        nextLevelIcon?.isHidden = true
+        
+        nextLevelIcon?.name = "nextLevelIcon"
+        nextLevelIcon?.isUserInteractionEnabled = false
+
+        levelSetup()
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -82,12 +90,20 @@ class GameScene: SKScene {
     
     func nextLevel() {
         LevelSelect.preset += 1
-        
+        levelSetup()
     }
     
    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        if(levelButton == true) {
+            if (nextLevelIcon?.contains(touch.location(in: self)))! {
+                nextLevel()
+            }
+        }
+        
+        
         if let label = self.label {
             label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
         }
@@ -128,35 +144,59 @@ class GameScene: SKScene {
             }
         }
         
-        if(redScored && redYes)
+        if(redScored)
         {
-            numShapes -= 1
             redYes = false
         }
         if(yellowScored && yellowYes)
         {
-            numShapes -= 1
             yellowYes = false
         }
         
         if(numShapes == 0) {
-            nextLevel()
+            levelButton = true
+            nextLevelIcon?.isHidden = false
+            greyCircle?.isHidden = true
+        }
+        
+        if(!redYes ) {
+            numShapes -= 1
+            print("redMinus")
+            redYes = false
+            redScored = false
+        }
+        
+        if(!yellowYes) {
+            numShapes -= 1
+            print("yellowMinus")
+            yellowYes = false
+            yellowScored = false
         }
     }
     
     func levelSetup(){
-        greyCircle?.anchorPoint.x = 0
-        greyCircle?.anchorPoint.y = 429
+        
+        greyCircle?.position = CGPoint(x: 0, y: 429)
+        greyCircle?.isHidden = false
+        levelButton = false
+        redSquare?.physicsBody?.isDynamic = true
+        yellowTriangle?.physicsBody?.isDynamic = true
+        nextLevelIcon?.isHidden = true
         
         if(LevelSelect.preset == 1) {
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
             numShapes = 2
-            yellowTriangle?.anchorPoint.x = -275
-            yellowTriangle?.anchorPoint.y = 0
-            redSquare?.anchorPoint.x = 275
-            redSquare?.anchorPoint.y = 0
+            yellowTriangle?.position = CGPoint(x: -275, y: 0)
+            redSquare?.position = CGPoint(x: 275, y: 0)
         }
+        
         if(LevelSelect.preset == 2) {
-            
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
+            numShapes = 2
+            yellowTriangle?.position = CGPoint(x: 225, y: 530)
+            redSquare?.position = CGPoint(x: -225, y: 530)
         }
         if(LevelSelect.preset == 3) {
             

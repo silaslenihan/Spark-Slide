@@ -20,48 +20,50 @@ class LevelSelect: UIViewController {
     
     
     @IBAction func levelSelecter(_ sender: UIButton) {
-    if sender.currentTitle == "levelOne" {
+    if sender.currentTitle == "1" {
         LevelSelect.preset = 1
     }
-    if sender.currentTitle == "levelTwo" {
+    if sender.currentTitle == "2" {
         LevelSelect.preset = 2
     }
-    if sender.currentTitle == "levelThree" {
+    if sender.currentTitle == "3" {
         LevelSelect.preset = 3
     }
-    if sender.currentTitle == "levelFour" {
+    if sender.currentTitle == "4" {
         LevelSelect.preset = 4
     }
-    if sender.currentTitle == "levelFive" {
+    if sender.currentTitle == "5" {
         LevelSelect.preset = 5
     }
-    if sender.currentTitle == "levelSix" {
+    if sender.currentTitle == "6" {
         LevelSelect.preset = 6
     }
-    if sender.currentTitle == "levelSeven" {
+    if sender.currentTitle == "7" {
         LevelSelect.preset = 7
     }
-    if sender.currentTitle == "levelEight" {
+    if sender.currentTitle == "8" {
         LevelSelect.preset = 8
     }
-    if sender.currentTitle == "levelNine" {
+    if sender.currentTitle == "9" {
         LevelSelect.preset = 9
     }
-    if sender.currentTitle == "levelTen" {
+    if sender.currentTitle == "10" {
         LevelSelect.preset = 10
     }
-    if sender.currentTitle == "levelEleven" {
+    if sender.currentTitle == "11" {
         LevelSelect.preset = 11
     }
-    if sender.currentTitle == "levelTwelve" {
+    if sender.currentTitle == "12" {
         LevelSelect.preset = 12
     }
         
     }
     
-    @IBOutlet weak var levelOne: UIStackView!
-    @IBOutlet weak var levelTwo: UIStackView!
-    @IBOutlet weak var levelThree: UIStackView!
+  
+
+    @IBOutlet weak var levelOne: UIButton!
+    @IBOutlet weak var levelTwo: UIButton!
+    @IBOutlet weak var levelThree: UIButton!
     @IBOutlet weak var levelFour: UIButton!
     @IBOutlet weak var levelFive: UIButton!
     @IBOutlet weak var levelSix: UIButton!
