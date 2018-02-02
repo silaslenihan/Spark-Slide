@@ -200,9 +200,9 @@ class GameScene: SKScene {
         
         greyCircle?.isHidden = false
         nextLevelIcon?.isHidden = true
-        starOne.isHidden = false
-        starTwo.isHidden = false
-        starThree.isHidden = false
+        starOne?.isHidden = false
+        starTwo?.isHidden = false
+        starThree?.isHidden = false
         
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
