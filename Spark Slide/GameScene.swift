@@ -20,19 +20,22 @@ class GameScene: SKScene {
     var yellowGoal: SKSpriteNode?
     var redGoal: SKSpriteNode?
     var nextLevelIcon: SKSpriteNode?
+    var starOne:SKSpriteNode?
+    var starTwo:SKSpriteNode?
+    var starThree:SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
     
     var redScored:Bool = false
     var yellowScored:Bool = false
-    var numShapes:Int = 2
     var levelButton:Bool = false
     
+    var numShapes:Int = 2
+    var swipeCount:Int = 0
+    var par: Int = 0
+    var stars: Int = 0
    
-    
-
-    
     override func didMove(to view: SKView) {
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
@@ -40,6 +43,9 @@ class GameScene: SKScene {
         yellowGoal = self.childNode(withName: "yellowGoal") as? SKSpriteNode
         redGoal = self.childNode(withName: "redGoal") as? SKSpriteNode
         nextLevelIcon = self.childNode(withName: "nextLevelIcon") as? SKSpriteNode
+        starOne = self.childNode(withName: "starOne") as? SKSpriteNode
+        starTwo = self.childNode(withName: "starTwo") as? SKSpriteNode
+        starThree = self.childNode(withName: "starThree") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -49,6 +55,9 @@ class GameScene: SKScene {
         redSquare?.physicsBody?.mass = 0.005
         yellowTriangle?.physicsBody?.mass = 0.01
         nextLevelIcon?.isHidden = true
+        starOne?.isHidden = true
+        starTwo?.isHidden = true
+        starThree?.isHidden = true
         
         nextLevelIcon?.name = "nextLevelIcon"
         nextLevelIcon?.isUserInteractionEnabled = false
@@ -68,7 +77,7 @@ class GameScene: SKScene {
         touchEnd = pos
         greyCircle?.physicsBody?.velocity = CGVector(dx: (greyCircle?.anchorPoint.x)!, dy: (greyCircle?.anchorPoint.y)!)
         greyCircle?.physicsBody?.angularVelocity = 0.0
-        
+        swipeCount += 1
         move()
 
     }
@@ -157,6 +166,17 @@ class GameScene: SKScene {
             levelButton = true
             nextLevelIcon?.isHidden = false
             greyCircle?.isHidden = true
+            if(swipeCount <= par) {
+                starThree?.isHidden = false
+            }
+            if (swipeCount <= (par * 2) ) {
+                starTwo?.isHidden = false
+            }
+            if (swipeCount <= (par * 3)) {
+                starOne?.isHidden = false
+            } else {
+                stars = 0
+            }
         }
         
         if(!redYes ) {
@@ -177,13 +197,21 @@ class GameScene: SKScene {
     func levelSetup(){
         
         greyCircle?.position = CGPoint(x: 0, y: 429)
+        
         greyCircle?.isHidden = false
+        nextLevelIcon?.isHidden = true
+        starOne.isHidden = false
+        starTwo.isHidden = false
+        starThree.isHidden = false
+        
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
-        nextLevelIcon?.isHidden = true
+        
+        swipeCount = 0
         
         if(LevelSelect.preset == 1) {
+            par = 5
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
             numShapes = 2
