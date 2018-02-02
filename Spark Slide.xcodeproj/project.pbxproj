@@ -16,6 +16,7 @@
 		0F694FAE201654F7005D78CF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F694FAD201654F7005D78CF /* GameViewController.swift */; };
 		0F694FB1201654F7005D78CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F694FAF201654F7005D78CF /* Main.storyboard */; };
 		0F694FB6201654F7005D78CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F694FB4201654F7005D78CF /* LaunchScreen.storyboard */; };
+		0FCB352B2024CE6D00C8F2AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCB352A20239BF400C8F2AC /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,8 +72,8 @@
 				0F694FAF201654F7005D78CF /* Main.storyboard */,
 				0F47BF2E202225EC003B4AF1 /* LevelSelect.swift */,
 				0F47BF2C2020DB06003B4AF1 /* HomeScreen.swift */,
-				0F694FB4201654F7005D78CF /* LaunchScreen.storyboard */,
 				0FCB352A20239BF400C8F2AC /* Assets.xcassets */,
+				0F694FB4201654F7005D78CF /* LaunchScreen.storyboard */,
 				0F694FB7201654F7005D78CF /* Info.plist */,
 			);
 			path = "Spark Slide";
@@ -141,6 +142,7 @@
 				0F694FA8201654F7005D78CF /* GameScene.sks in Resources */,
 				0F694FB6201654F7005D78CF /* LaunchScreen.storyboard in Resources */,
 				0F694FAA201654F7005D78CF /* Actions.sks in Resources */,
+				0FCB352B2024CE6D00C8F2AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

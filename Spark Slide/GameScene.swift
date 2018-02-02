@@ -81,6 +81,7 @@ class GameScene: SKScene {
     }
     
     func nextLevel() {
+        LevelSelect.preset += 1
         
     }
     
