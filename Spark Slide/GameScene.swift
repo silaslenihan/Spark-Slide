@@ -84,6 +84,9 @@ class GameScene: SKScene {
         move()
     }
     
+    //------------------------------------------------------------------------
+    // move() - moves greyCircle based on touchBegan and touchEnd locations.
+    //------------------------------------------------------------------------
     func move () {
         let Bx = touchEnd.x
         let By = touchEnd.y
@@ -105,7 +108,10 @@ class GameScene: SKScene {
     }
     
    
-    
+    //------------------------------------------------------------------------
+    // touchesBegan() - allows for next level icons to be touched, resulting in
+    // a change to the next screen.
+    //------------------------------------------------------------------------
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         if(levelButton == true) {
@@ -128,24 +134,17 @@ class GameScene: SKScene {
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches {
-            self.touchMoved(toPoint: t.location(in: self))
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
     
     
+    //------------------------------------------------------------------------
+    // update() checks every frame for whether each shape is being touched by
+    // the grey ball, and if so updates their properties accordingly.
+    //------------------------------------------------------------------------
     override func update(_ currentTime: TimeInterval) {
+        //these bools mean whether their color is still in play
         var redYes: Bool = true
         var yellowYes:Bool = true
+        //checks whether is contacting grey ball
         if(redYes) {
             if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
                 redSquare?.isHidden = true
@@ -161,6 +160,7 @@ class GameScene: SKScene {
             }
         }
         
+        //if red is scored, it means that that color is no longer in play
         if(redScored)
         {
             redYes = false
@@ -170,11 +170,16 @@ class GameScene: SKScene {
             yellowYes = false
         }
         
+        //runs once none of the colors are in play, checks how many stars there should be
         if(numShapes == 0) {
             numShapes = 1
+            
+            //means the level button will come up and be capable of being selected
             levelButton = true
-            //nextLevelIcon?.isHidden = false
+
             greyCircle?.isHidden = true
+            
+            //checks how many stars there should be depending on the par
             if(swipeCount <= par) {
                 threeStars?.isHidden = false
                 print("three stars")
@@ -197,9 +202,11 @@ class GameScene: SKScene {
             
         }
         
+        //checks whether the color is still in play, if not subtracts for numShapes
         if(!redYes ) {
             numShapes -= 1
             print("redMinus")
+            redSquare?.position = CGPoint(x: 1000, y: 1000)
             redYes = false
             redScored = false
         }
@@ -207,17 +214,21 @@ class GameScene: SKScene {
         if(!yellowYes) {
             numShapes -= 1
             print("yellowMinus")
+            yellowTriangle?.position = CGPoint(x: 1000, y: 1000)
             yellowYes = false
             yellowScored = false
         }
     }
     
+    //------------------------------------------------------------------------------------
+    // levelSetup() - sets up levels and instance data for each level according to
+    // LevelSelect.preset
+    //------------------------------------------------------------------------------------
     func levelSetup(){
         
         greyCircle?.position = CGPoint(x: 0, y: 429)
         
         greyCircle?.isHidden = false
-        nextLevelIcon?.isHidden = true
         zeroStars?.isHidden = true
         oneStar?.isHidden = true
         twoStars?.isHidden = true
@@ -230,6 +241,9 @@ class GameScene: SKScene {
         
         swipeCount = -1
         
+        //sets up location for each node, par, and number of shapes.
+        
+        //LEVEL 1
         if(LevelSelect.preset == 1) {
             swipeCount = 0
             par = 5
@@ -240,6 +254,7 @@ class GameScene: SKScene {
             redSquare?.position = CGPoint(x: 275, y: 0)
         }
         
+        //LEVEL 2
         if(LevelSelect.preset == 2) {
             par = 8
             redSquare?.isHidden = false
@@ -249,44 +264,68 @@ class GameScene: SKScene {
             redSquare?.position = CGPoint(x: -225, y: 530)
         }
         
+        //LEVEL 3
         if(LevelSelect.preset == 3) {
             
         }
         
+        //LEVEL 4
         if(LevelSelect.preset == 4) {
             
         }
         
+        //LEVEL 5
         if(LevelSelect.preset == 5) {
             
         }
         
+        //LEVEL 6
         if(LevelSelect.preset == 6) {
             
         }
         
+        //LEVEL 7
         if(LevelSelect.preset == 7) {
             
         }
         
+        //LEVEL 8
         if(LevelSelect.preset == 8) {
             
         }
         
+        //LEVEL 9
         if(LevelSelect.preset == 9) {
             
         }
         
+        //LEVEL 10
         if(LevelSelect.preset == 10) {
             
         }
         
+        //LEVEL 11
         if(LevelSelect.preset == 11) {
             
         }
         
+        //LEVEL 12
         if(LevelSelect.preset == 12) {
             
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            self.touchMoved(toPoint: t.location(in: self))
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
 }
