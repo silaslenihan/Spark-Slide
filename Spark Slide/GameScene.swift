@@ -20,9 +20,10 @@ class GameScene: SKScene {
     var yellowGoal: SKSpriteNode?
     var redGoal: SKSpriteNode?
     var nextLevelIcon: SKSpriteNode?
-    var starOne:SKSpriteNode?
-    var starTwo:SKSpriteNode?
-    var starThree:SKSpriteNode?
+    var oneStar: SKSpriteNode?
+    var twoStars: SKSpriteNode?
+    var threeStars: SKSpriteNode?
+    var zeroStars: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -43,9 +44,11 @@ class GameScene: SKScene {
         yellowGoal = self.childNode(withName: "yellowGoal") as? SKSpriteNode
         redGoal = self.childNode(withName: "redGoal") as? SKSpriteNode
         nextLevelIcon = self.childNode(withName: "nextLevelIcon") as? SKSpriteNode
-        starOne = self.childNode(withName: "starOne") as? SKSpriteNode
-        starTwo = self.childNode(withName: "starTwo") as? SKSpriteNode
-        starThree = self.childNode(withName: "starThree") as? SKSpriteNode
+        zeroStars = self.childNode(withName: "zeroStars") as? SKSpriteNode
+        oneStar = self.childNode(withName: "oneStar") as? SKSpriteNode
+        twoStars = self.childNode(withName: "twoStars") as? SKSpriteNode
+        threeStars = self.childNode(withName: "threeStars") as? SKSpriteNode
+        
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -55,9 +58,9 @@ class GameScene: SKScene {
         redSquare?.physicsBody?.mass = 0.005
         yellowTriangle?.physicsBody?.mass = 0.01
         nextLevelIcon?.isHidden = true
-        starOne?.isHidden = true
-        starTwo?.isHidden = true
-        starThree?.isHidden = true
+        oneStar?.isHidden = true
+        twoStars?.isHidden = true
+        threeStars?.isHidden = true
         
         nextLevelIcon?.name = "nextLevelIcon"
         nextLevelIcon?.isUserInteractionEnabled = false
@@ -79,7 +82,6 @@ class GameScene: SKScene {
         greyCircle?.physicsBody?.angularVelocity = 0.0
         swipeCount += 1
         move()
-
     }
     
     func move () {
@@ -107,7 +109,13 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         if(levelButton == true) {
-            if (nextLevelIcon?.contains(touch.location(in: self)))! {
+            if (zeroStars?.contains(touch.location(in: self)))! {
+                nextLevel()
+            } else if (oneStar?.contains(touch.location(in: self)))! {
+                self.nextLevel()
+            } else if (twoStars?.contains(touch.location(in: self)))! {
+                nextLevel()
+            } else if (threeStars?.contains(touch.location(in: self)))! {
                 nextLevel()
             }
         }
@@ -163,20 +171,30 @@ class GameScene: SKScene {
         }
         
         if(numShapes == 0) {
+            numShapes = 1
             levelButton = true
-            nextLevelIcon?.isHidden = false
+            //nextLevelIcon?.isHidden = false
             greyCircle?.isHidden = true
             if(swipeCount <= par) {
-                starThree?.isHidden = false
+                threeStars?.isHidden = false
+                print("three stars")
             }
-            if (swipeCount <= (par * 2) ) {
-                starTwo?.isHidden = false
+            else if (swipeCount <= (par * 2)) {
+                twoStars?.isHidden = false
+                print ("two stars")
             }
-            if (swipeCount <= (par * 3)) {
-                starOne?.isHidden = false
+            else if (swipeCount <= (par * 3)) {
+                oneStar?.isHidden = false
+                print("one star")
             } else {
-                stars = 0
+                zeroStars?.isHidden = false
+                print("zero stars")
             }
+
+            print(swipeCount)
+            redSquare?.position = CGPoint(x: 0, y: 0)
+            yellowTriangle?.position = CGPoint(x: 0, y: 0)
+            
         }
         
         if(!redYes ) {
@@ -200,17 +218,20 @@ class GameScene: SKScene {
         
         greyCircle?.isHidden = false
         nextLevelIcon?.isHidden = true
-        starOne?.isHidden = false
-        starTwo?.isHidden = false
-        starThree?.isHidden = false
+        zeroStars?.isHidden = true
+        oneStar?.isHidden = true
+        twoStars?.isHidden = true
+        threeStars?.isHidden = true
+        
         
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
         
-        swipeCount = 0
+        swipeCount = -1
         
         if(LevelSelect.preset == 1) {
+            swipeCount = 0
             par = 5
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
@@ -220,39 +241,50 @@ class GameScene: SKScene {
         }
         
         if(LevelSelect.preset == 2) {
+            par = 8
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
             numShapes = 2
             yellowTriangle?.position = CGPoint(x: 225, y: 530)
             redSquare?.position = CGPoint(x: -225, y: 530)
         }
+        
         if(LevelSelect.preset == 3) {
             
         }
+        
         if(LevelSelect.preset == 4) {
             
         }
+        
         if(LevelSelect.preset == 5) {
             
         }
+        
         if(LevelSelect.preset == 6) {
             
         }
+        
         if(LevelSelect.preset == 7) {
             
         }
+        
         if(LevelSelect.preset == 8) {
             
         }
+        
         if(LevelSelect.preset == 9) {
             
         }
+        
         if(LevelSelect.preset == 10) {
             
         }
+        
         if(LevelSelect.preset == 11) {
             
         }
+        
         if(LevelSelect.preset == 12) {
             
         }
