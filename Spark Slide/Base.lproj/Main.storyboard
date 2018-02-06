@@ -247,31 +247,69 @@
         <scene sceneID="u6T-y3-gsn">
             <objects>
                 <viewController id="TeJ-Qg-BUE" customClass="HomeScreen" customModule="Spark_Slide" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hba-gR-OsI">
+                    <view key="view" contentMode="scaleAspectFit" id="Hba-gR-OsI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="350" translatesAutoresizingMaskIntoConstraints="NO" id="juw-dB-u38">
-                                <rect key="frame" x="79" y="113" width="216" height="440.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spark Slide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPP-Ro-gYf">
-                                        <rect key="frame" x="0.0" y="0.0" width="216" height="41.5"/>
-                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="34"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-90-q6O">
-                                        <rect key="frame" x="0.0" y="391.5" width="216" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                        <state key="normal" title="Play">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="HRf-4F-sBL" kind="show" animates="NO" id="c9a-Zl-gOB"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="350" translatesAutoresizingMaskIntoConstraints="NO" id="juw-dB-u38">
+                                <rect key="frame" x="79" y="313" width="216" height="41.5"/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-90-q6O">
+                                <rect key="frame" x="79" y="439" width="216" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="49"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="HRf-4F-sBL" kind="show" animates="NO" id="c9a-Zl-gOB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spark Slide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPP-Ro-gYf">
+                                <rect key="frame" x="22" y="64" width="330" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="52"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settings_icon" highlightedImage="settings_icon" translatesAutoresizingMaskIntoConstraints="NO" id="lNg-72-Wed">
+                                <rect key="frame" x="79" y="544" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sound icon" highlightedImage="sound icon-1" translatesAutoresizingMaskIntoConstraints="NO" id="Icm-TX-MF7">
+                                <rect key="frame" x="162" y="544" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="greyCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Lh2-Mu-2c2">
+                                <rect key="frame" x="162" y="255" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellow circle" translatesAutoresizingMaskIntoConstraints="NO" id="P7P-gm-HMU">
+                                <rect key="frame" x="245" y="362" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="green hexagon" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-p2-pXz">
+                                <rect key="frame" x="2" y="212" width="118" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="purple pentagon" translatesAutoresizingMaskIntoConstraints="NO" id="P60-us-ctB">
+                                <rect key="frame" x="128" y="136" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="red square" translatesAutoresizingMaskIntoConstraints="NO" id="Mye-h8-ZWa">
+                                <rect key="frame" x="79" y="332" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue diamond" translatesAutoresizingMaskIntoConstraints="NO" id="BAd-aX-1Jf">
+                                <rect key="frame" x="245" y="177" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="music icon" highlightedImage="sound icon" translatesAutoresizingMaskIntoConstraints="NO" id="fvc-ti-Ci7">
+                                <rect key="frame" x="245" y="544" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -287,6 +325,18 @@
             <point key="canvasLocation" x="192.80000000000001" y="890.10494752623697"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="blue diamond" width="207" height="158"/>
+        <image name="green hexagon" width="196" height="172"/>
+        <image name="greyCircle" width="2000" height="2000"/>
+        <image name="music icon" width="545" height="522"/>
+        <image name="purple pentagon" width="167" height="147"/>
+        <image name="red square" width="96" height="92"/>
+        <image name="settings_icon" width="512" height="512"/>
+        <image name="sound icon" width="453" height="452"/>
+        <image name="sound icon-1" width="1080" height="1920"/>
+        <image name="yellow circle" width="242" height="229"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VAx-ZR-vdJ"/>
     </inferredMetricsTieBreakers>
