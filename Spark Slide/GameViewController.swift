@@ -10,7 +10,13 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, backButtonProtocol {
+    
+    
+    func backButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +34,8 @@ class GameViewController: UIViewController {
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
-            view.showsNodeCount = true
         }
+        GameScene.myDelegate = self
     }
 
     override var shouldAutorotate: Bool {

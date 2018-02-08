@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var redSquare: SKSpriteNode?
     var greyCircle: SKSpriteNode?
     var yellowTriangle: SKSpriteNode?
+    var blueDiamond: SKSpriteNode?
     var yellowGoal: SKSpriteNode?
     var redGoal: SKSpriteNode?
     var nextLevelIcon: SKSpriteNode?
@@ -24,6 +25,14 @@ class GameScene: SKScene {
     var twoStars: SKSpriteNode?
     var threeStars: SKSpriteNode?
     var zeroStars: SKSpriteNode?
+    var pauseButton: SKSpriteNode?
+    var resetButton: SKSpriteNode?
+    var levelSelectButton: SKSpriteNode?
+    var resume: SKSpriteNode?
+    var redGoalBoy: SKSpriteNode?
+    var yellowGoalBoy: SKSpriteNode?
+    var blueGoal: SKSpriteNode?
+    var blueGoalBoy: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -31,12 +40,15 @@ class GameScene: SKScene {
     var redScored:Bool = false
     var yellowScored:Bool = false
     var levelButton:Bool = false
+    var gamePaused:Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
     var par: Int = 0
     var stars: Int = 0
    
+    static var myDelegate : backButtonProtocol?
+    
     override func didMove(to view: SKView) {
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
@@ -48,7 +60,15 @@ class GameScene: SKScene {
         oneStar = self.childNode(withName: "oneStar") as? SKSpriteNode
         twoStars = self.childNode(withName: "twoStars") as? SKSpriteNode
         threeStars = self.childNode(withName: "threeStars") as? SKSpriteNode
-        
+        pauseButton = self.childNode(withName: "pauseButton") as? SKSpriteNode
+        resetButton = self.childNode(withName: "resetButton") as? SKSpriteNode
+        levelSelectButton = self.childNode(withName: "levelSelectButton") as? SKSpriteNode
+        resume = self.childNode(withName: "resume") as? SKSpriteNode
+        blueDiamond = self.childNode(withName: "blueDiamond") as? SKSpriteNode
+        redGoalBoy = self.childNode(withName: "redGoalBoy") as? SKSpriteNode
+        yellowGoalBoy = self.childNode(withName: "yellowGoalBoy") as? SKSpriteNode
+        blueGoalBoy = self.childNode(withName: "blueGoalBoy") as? SKSpriteNode
+        blueGoal = self.childNode(withName: "blueGoal") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -64,7 +84,7 @@ class GameScene: SKScene {
         
         nextLevelIcon?.name = "nextLevelIcon"
         nextLevelIcon?.isUserInteractionEnabled = false
-
+        
         levelSetup()
     }
     
@@ -80,8 +100,10 @@ class GameScene: SKScene {
         touchEnd = pos
         greyCircle?.physicsBody?.velocity = CGVector(dx: (greyCircle?.anchorPoint.x)!, dy: (greyCircle?.anchorPoint.y)!)
         greyCircle?.physicsBody?.angularVelocity = 0.0
-        swipeCount += 1
-        move()
+        if(!gamePaused) {
+            swipeCount += 1
+            move()
+        }
     }
     
     //------------------------------------------------------------------------
@@ -126,6 +148,37 @@ class GameScene: SKScene {
             }
         }
         
+
+        if(pauseButton?.contains(touch.location(in: self)))! {
+            greyCircle?.isHidden = true
+            yellowTriangle?.isHidden = true
+            redSquare?.isHidden = true
+            
+            levelSelectButton?.isHidden = false
+            resetButton?.isHidden = false
+            resume?.isHidden = false
+            
+            gamePaused = true
+            swipeCount -= 1
+        
+        }
+        if(gamePaused) {
+            if(levelSelectButton?.contains(touch.location(in: self)))! {
+                GameScene.myDelegate?.backButton()
+            }
+            if(resetButton?.contains(touch.location(in: self)))! {
+                levelSetup()
+            }
+            if(resume?.contains(touch.location(in: self)))! {
+                gamePaused = false
+                resume?.isHidden = true
+                levelSelectButton?.isHidden = true
+                resetButton?.isHidden = true
+                redSquare?.isHidden = false
+                greyCircle?.isHidden = false
+                yellowTriangle?.isHidden = false
+            }
+        }
         
         if let label = self.label {
             label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
@@ -137,7 +190,7 @@ class GameScene: SKScene {
     
     
     //------------------------------------------------------------------------
-    // update() checks every frame for whether each shape is being touched by
+    // update() - checks every frame for whether each shape is being touched by
     // the grey ball, and if so updates their properties accordingly.
     //------------------------------------------------------------------------
     override func update(_ currentTime: TimeInterval) {
@@ -233,13 +286,20 @@ class GameScene: SKScene {
         oneStar?.isHidden = true
         twoStars?.isHidden = true
         threeStars?.isHidden = true
-        
+        resetButton?.isHidden = true
+        levelSelectButton?.isHidden = true
+        resume?.isHidden = true
+        blueDiamond?.isHidden = true
+        blueGoal?.isHidden = true
+        blueGoalBoy?.isHidden = true
         
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
         
         swipeCount = -1
+        redSquare?.zRotation = 0
+        yellowTriangle?.zRotation = 0
         
         //sets up location for each node, par, and number of shapes.
         
@@ -266,12 +326,23 @@ class GameScene: SKScene {
         
         //LEVEL 3
         if(LevelSelect.preset == 3) {
+            par = 8
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
+            numShapes = 2
+            yellowTriangle?.position = CGPoint(x: 225, y: 530)
+            redSquare?.position = CGPoint(x: -225, y: 530)
+            blueDiamond?.position = CGPoint(x: 0, y: 530)
+            blueGoal?.position = CGPoint(x:0, y: -600.942)
+            blueGoalBoy?.position = CGPoint(x:0,y: -566)
+            blueDiamond?.isHidden = false
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
             
         }
         
         //LEVEL 4
         if(LevelSelect.preset == 4) {
-            
         }
         
         //LEVEL 5
@@ -328,4 +399,8 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
+}
+
+protocol backButtonProtocol {
+    func backButton()
 }
