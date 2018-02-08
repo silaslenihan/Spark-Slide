@@ -39,6 +39,7 @@ class GameScene: SKScene {
     
     var redScored:Bool = false
     var yellowScored:Bool = false
+    var blueScored:Bool = false
     var levelButton:Bool = false
     var gamePaused:Bool = false
     
@@ -76,7 +77,8 @@ class GameScene: SKScene {
         
         greyCircle?.physicsBody?.mass = 0.01
         redSquare?.physicsBody?.mass = 0.005
-        yellowTriangle?.physicsBody?.mass = 0.01
+        yellowTriangle?.physicsBody?.mass = 0.005
+        blueDiamond?.physicsBody?.mass = 0.005
         nextLevelIcon?.isHidden = true
         oneStar?.isHidden = true
         twoStars?.isHidden = true
@@ -197,6 +199,7 @@ class GameScene: SKScene {
         //these bools mean whether their color is still in play
         var redYes: Bool = true
         var yellowYes:Bool = true
+        var blueYes:Bool = true
         //checks whether is contacting grey ball
         if(redYes) {
             if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
@@ -213,6 +216,14 @@ class GameScene: SKScene {
             }
         }
         
+        if(blueYes) {
+            if(blueDiamond?.physicsBody?.allContactedBodies().contains((blueGoal?.physicsBody)!))! {
+                blueDiamond?.isHidden = true
+                blueDiamond?.physicsBody?.isDynamic = false
+                blueScored = true
+            }
+        }
+        
         //if red is scored, it means that that color is no longer in play
         if(redScored)
         {
@@ -221,6 +232,10 @@ class GameScene: SKScene {
         if(yellowScored && yellowYes)
         {
             yellowYes = false
+        }
+        if(blueScored && blueYes)
+        {
+            blueYes = false
         }
         
         //runs once none of the colors are in play, checks how many stars there should be
@@ -252,6 +267,7 @@ class GameScene: SKScene {
             print(swipeCount)
             redSquare?.position = CGPoint(x: 0, y: 0)
             yellowTriangle?.position = CGPoint(x: 0, y: 0)
+            blueDiamond?.position = CGPoint(x: 0, y: 0)
             
         }
         
@@ -271,6 +287,14 @@ class GameScene: SKScene {
             yellowYes = false
             yellowScored = false
         }
+        
+        if(!blueYes) {
+            numShapes -= 1
+            print("blueMinus")
+            blueDiamond?.position = CGPoint(x: 1000, y: 1000)
+            blueYes = false
+            blueScored = false
+        }
     }
     
     //------------------------------------------------------------------------------------
@@ -279,7 +303,7 @@ class GameScene: SKScene {
     //------------------------------------------------------------------------------------
     func levelSetup(){
         
-        greyCircle?.position = CGPoint(x: 0, y: 429)
+        greyCircle?.position = CGPoint(x: 0, y: 0)
         
         greyCircle?.isHidden = false
         zeroStars?.isHidden = true
@@ -326,19 +350,18 @@ class GameScene: SKScene {
         
         //LEVEL 3
         if(LevelSelect.preset == 3) {
-            par = 8
+            par = 12
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
-            numShapes = 2
+            numShapes = 3
             yellowTriangle?.position = CGPoint(x: 225, y: 530)
             redSquare?.position = CGPoint(x: -225, y: 530)
-            blueDiamond?.position = CGPoint(x: 0, y: 530)
-            blueGoal?.position = CGPoint(x:0, y: -600.942)
-            blueGoalBoy?.position = CGPoint(x:0,y: -566)
+            blueDiamond?.position = CGPoint(x: 0, y: -530)
+            blueGoal?.position = CGPoint(x:0, y: 600.942)
+            blueGoalBoy?.position = CGPoint(x:0,y: 566)
             blueDiamond?.isHidden = false
             blueGoal?.isHidden = false
             blueGoalBoy?.isHidden = false
-            
         }
         
         //LEVEL 4
