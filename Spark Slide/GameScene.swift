@@ -325,6 +325,18 @@ class GameScene: SKScene {
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
         
+        redSquare?.zRotation = 0
+        yellowTriangle?.zRotation = 0
+        blueDiamond?.zRotation = 0
+        
+        redSquare?.physicsBody?.isDynamic = false
+        yellowTriangle?.physicsBody?.isDynamic = false
+        blueDiamond?.physicsBody?.isDynamic = false
+        
+        redSquare?.physicsBody?.isDynamic = true
+        yellowTriangle?.physicsBody?.isDynamic = true
+        blueDiamond?.physicsBody?.isDynamic = true
+        
         swipeCount = -1
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
