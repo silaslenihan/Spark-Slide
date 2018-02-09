@@ -328,10 +328,13 @@ class GameScene: SKScene {
         blueGoalBoy?.position = CGPoint(x:1000,y: 1000)
         
         wall?.position = CGPoint(x:1000, y:1000)
-        oneStar?.position = CGPoint(x: 0 , y: 0)
-        twoStars?.position = CGPoint(x: 0 , y: 0)
-        threeStars?.position = CGPoint(x: 0 , y: 0)
-        zeroStars?.position = CGPoint(x: 0 , y: 0)
+        oneStar?.position = CGPoint(x: 34.251 , y: -94.329)
+        twoStars?.position = CGPoint(x: 34.251 , y: -94.329)
+        threeStars?.position = CGPoint(x: 34.251 , y: -94.329)
+        zeroStars?.position = CGPoint(x: 34.251 , y: -94.329)
+        levelSelectButton?.position = CGPoint(x: 0,y: 430)
+        resetButton?.position = CGPoint(x:0,y:230)
+        resume?.position = CGPoint(x:0, y:30)
         
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
@@ -399,6 +402,12 @@ class GameScene: SKScene {
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
             numShapes = 3
+            
+            blueDiamond?.isHidden = false
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
+            
+            greyCircle?.position = CGPoint(x:25.009,y:530.177)
             yellowTriangle?.position = CGPoint(x:-195.697,y:193.126)
             blueDiamond?.position = CGPoint(x:-195.697, y:-245.257)
             redSquare?.position = CGPoint (x:-195.697, y:530.097)
