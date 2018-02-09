@@ -33,6 +33,7 @@ class GameScene: SKScene {
     var yellowGoalBoy: SKSpriteNode?
     var blueGoal: SKSpriteNode?
     var blueGoalBoy: SKSpriteNode?
+    var wall: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -70,6 +71,7 @@ class GameScene: SKScene {
         yellowGoalBoy = self.childNode(withName: "yellowGoalBoy") as? SKSpriteNode
         blueGoalBoy = self.childNode(withName: "blueGoalBoy") as? SKSpriteNode
         blueGoal = self.childNode(withName: "blueGoal") as? SKSpriteNode
+        wall = self.childNode(withName: "wall") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -317,9 +319,19 @@ class GameScene: SKScene {
         blueGoal?.isHidden = true
         blueGoalBoy?.isHidden = true
         
+        yellowGoal?.position = CGPoint(x:-310.357, y:-600.941)
+        yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
+        redGoal?.position = CGPoint(x:310.357, y:-600.942)
+        redGoalBoy?.position = CGPoint(x: 275,y: -567)
         blueDiamond?.position = CGPoint(x: -1000, y: 1000)
         blueGoal?.position = CGPoint(x:1000, y: 1000)
         blueGoalBoy?.position = CGPoint(x:1000,y: 1000)
+        
+        wall?.position = CGPoint(x:1000, y:1000)
+        oneStar?.position = CGPoint(x: 0 , y: 0)
+        twoStars?.position = CGPoint(x: 0 , y: 0)
+        threeStars?.position = CGPoint(x: 0 , y: 0)
+        zeroStars?.position = CGPoint(x: 0 , y: 0)
         
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
@@ -382,6 +394,23 @@ class GameScene: SKScene {
         
         //LEVEL 4
         if(LevelSelect.preset == 4) {
+            par = 12
+            wall?.position = CGPoint(x:168.632, y:322.604)
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
+            numShapes = 3
+            yellowTriangle?.position = CGPoint(x:-195.697,y:193.126)
+            blueDiamond?.position = CGPoint(x:-195.697, y:-245.257)
+            redSquare?.position = CGPoint (x:-195.697, y:530.097)
+            yellowGoal?.position = CGPoint(x:310.357, y:199.184)
+            yellowGoalBoy?.position = CGPoint(x:275, y:165.242)
+            redGoal?.position = CGPoint(x:310.357, y:-600.942)
+            redGoalBoy?.position = CGPoint(x: 275,y: -567)
+            blueGoal?.position = CGPoint(x:310.358, y:563.838)
+            blueGoalBoy?.position = CGPoint(x: 275, y:567)
+            
+            
+            
         }
         
         //LEVEL 5
