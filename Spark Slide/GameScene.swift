@@ -317,6 +317,10 @@ class GameScene: SKScene {
         blueGoal?.isHidden = true
         blueGoalBoy?.isHidden = true
         
+        blueDiamond?.position = CGPoint(x: -1000, y: 1000)
+        blueGoal?.position = CGPoint(x:1000, y: 1000)
+        blueGoalBoy?.position = CGPoint(x:1000,y: 1000)
+        
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
