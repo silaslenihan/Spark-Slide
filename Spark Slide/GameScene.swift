@@ -34,6 +34,9 @@ class GameScene: SKScene {
     var blueGoal: SKSpriteNode?
     var blueGoalBoy: SKSpriteNode?
     var wall: SKSpriteNode?
+    var purplePentagon: SKSpriteNode?
+    var purpleGoal:SKSpriteNode?
+    var purpleGoalBoy:SKSpriteNode?
 
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
@@ -42,6 +45,8 @@ class GameScene: SKScene {
     var redScored:Bool = false
     var yellowScored:Bool = false
     var blueScored:Bool = false
+    var purpleScored:Bool = false
+    var greenScored:Bool = false
     var levelButton:Bool = false
     var gamePaused:Bool = false
     
@@ -75,7 +80,9 @@ class GameScene: SKScene {
         blueGoalBoy = self.childNode(withName: "blueGoalBoy") as? SKSpriteNode
         blueGoal = self.childNode(withName: "blueGoal") as? SKSpriteNode
         wall = self.childNode(withName: "wall") as? SKSpriteNode
-        
+        purplePentagon = self.childNode(withName: "purplePentagon") as? SKSpriteNode
+        purpleGoal = self.childNode(withName: "purpleGoal") as? SKSpriteNode
+        purpleGoalBoy = self.childNode(withName: "purpleGoalBoy") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -85,6 +92,7 @@ class GameScene: SKScene {
         redSquare?.physicsBody?.mass = 0.005
         yellowTriangle?.physicsBody?.mass = 0.005
         blueDiamond?.physicsBody?.mass = 0.005
+        purplePentagon?.physicsBody?.mass = 0.005
         nextLevelIcon?.isHidden = true
         oneStar?.isHidden = true
         twoStars?.isHidden = true
@@ -206,6 +214,7 @@ class GameScene: SKScene {
         var redYes: Bool = true
         var yellowYes:Bool = true
         var blueYes:Bool = true
+        var purpleYes:Bool = true
         //checks whether is contacting grey ball
         if(redYes) {
             if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
@@ -230,6 +239,14 @@ class GameScene: SKScene {
             }
         }
         
+        if(purpleYes) {
+            if(purplePentagon?.physicsBody?.allContactedBodies().contains((purpleGoal?.physicsBody)!))! {
+                purplePentagon?.isHidden = true
+                purplePentagon?.physicsBody?.isDynamic = false
+                purpleScored = true
+            }
+        }
+        
         //if red is scored, it means that that color is no longer in play
         if(redScored)
         {
@@ -242,6 +259,10 @@ class GameScene: SKScene {
         if(blueScored && blueYes)
         {
             blueYes = false
+        }
+        if(purpleScored && purpleYes)
+        {
+            purpleYes = false
         }
         
         //runs once none of the colors are in play, checks how many stars there should be
@@ -301,6 +322,14 @@ class GameScene: SKScene {
             blueYes = false
             blueScored = false
         }
+        
+        if(!purpleYes) {
+            numShapes -= 1
+            print("purpleMinus")
+            purplePentagon?.position = CGPoint(x: 1000, y: 1000)
+            purpleYes = false
+            purpleScored = false
+        }
     }
     
     //------------------------------------------------------------------------------------
@@ -322,6 +351,9 @@ class GameScene: SKScene {
         blueDiamond?.isHidden = true
         blueGoal?.isHidden = true
         blueGoalBoy?.isHidden = true
+        purplePentagon?.isHidden = true
+        purpleGoal?.isHidden = true
+        purpleGoalBoy?.isHidden = true
         
         yellowGoal?.position = CGPoint(x:-310.357, y:-600.941)
         yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
@@ -330,6 +362,9 @@ class GameScene: SKScene {
         blueDiamond?.position = CGPoint(x: -1000, y: 1000)
         blueGoal?.position = CGPoint(x:1000, y: 1000)
         blueGoalBoy?.position = CGPoint(x:1000,y: 1000)
+        purplePentagon?.position = CGPoint(x: -1000, y: 1000)
+        purpleGoal?.position = CGPoint(x:1000, y: 1000)
+        purpleGoalBoy?.position = CGPoint(x:1000,y: 1000)
         
         wall?.position = CGPoint(x:1000, y:1000)
         oneStar?.position = CGPoint(x: 0 , y: 0)
@@ -347,14 +382,17 @@ class GameScene: SKScene {
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
         blueDiamond?.zRotation = 0
+        purplePentagon?.zRotation = 0
         
         redSquare?.physicsBody?.isDynamic = false
         yellowTriangle?.physicsBody?.isDynamic = false
         blueDiamond?.physicsBody?.isDynamic = false
+        purplePentagon?.physicsBody?.isDynamic = false
         
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
         blueDiamond?.physicsBody?.isDynamic = true
+        purplePentagon?.physicsBody?.isDynamic = true
         
         swipeCount = -1
         redSquare?.zRotation = 0
