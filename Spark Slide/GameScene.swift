@@ -10,10 +10,10 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    var background: SKSpriteNode?
     var redSquare: SKSpriteNode?
     var greyCircle: SKSpriteNode?
     var yellowTriangle: SKSpriteNode?
@@ -34,6 +34,7 @@ class GameScene: SKScene {
     var blueGoal: SKSpriteNode?
     var blueGoalBoy: SKSpriteNode?
     var wall: SKSpriteNode?
+
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -52,6 +53,8 @@ class GameScene: SKScene {
     static var myDelegate : backButtonProtocol?
     
     override func didMove(to view: SKView) {
+        background = self.childNode(withName: "background") as? SKSpriteNode
+        background?.position = CGPoint(x:0,y:0)
         redSquare = self.childNode(withName: "redSquare") as? SKSpriteNode
         greyCircle = self.childNode(withName: "greyCircle") as? SKSpriteNode
         yellowTriangle = self.childNode(withName: "yellowTriangle") as? SKSpriteNode
@@ -72,6 +75,7 @@ class GameScene: SKScene {
         blueGoalBoy = self.childNode(withName: "blueGoalBoy") as? SKSpriteNode
         blueGoal = self.childNode(withName: "blueGoal") as? SKSpriteNode
         wall = self.childNode(withName: "wall") as? SKSpriteNode
+        
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
