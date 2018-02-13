@@ -459,14 +459,37 @@ class GameScene: SKScene {
             redGoalBoy?.position = CGPoint(x: 275,y: -567)
             blueGoal?.position = CGPoint(x:310.358, y:563.838)
             blueGoalBoy?.position = CGPoint(x: 275, y:567)
-            
-            
-            
         }
         
         //LEVEL 5
         if(LevelSelect.preset == 5) {
+            par = 8
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
+            numShapes = 4
             
+            blueDiamond?.isHidden = false
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
+            
+            purplePentagon?.isHidden = false
+            purpleGoal?.isHidden = false
+            purpleGoalBoy?.isHidden = false
+                
+            greyCircle?.position = CGPoint(x:0,y:0)
+            yellowTriangle?.position = CGPoint(x:0,y:-200)
+            blueDiamond?.position = CGPoint(x:-200, y:0)
+            redSquare?.position = CGPoint (x:200, y:0)
+            purplePentagon?.position = CGPoint(x: 0, y: 200)
+            
+            yellowGoal?.position =  CGPoint(x:-310.357, y:-600.942)
+            yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
+            redGoal?.position = CGPoint(x:310.357, y:-600.942)
+            redGoalBoy?.position = CGPoint(x: 275,y: -567)
+            blueGoal?.position = CGPoint(x:310.358, y:563.838)
+            blueGoalBoy?.position = CGPoint(x: 275, y:567)
+            purpleGoal?.position = CGPoint(x:-310.358, y:563.838)
+            purpleGoalBoy?.position = CGPoint(x: -275, y:567)
         }
         
         //LEVEL 6
