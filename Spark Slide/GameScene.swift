@@ -51,6 +51,7 @@ class GameScene: SKScene {
     var greenScored:Bool = false
     var levelButton:Bool = false
     var gamePaused:Bool = false
+    var wallIsRotating: Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -335,6 +336,10 @@ class GameScene: SKScene {
             purpleYes = false
             purpleScored = false
         }
+        
+        if(wallIsRotating) {
+            wall?.zRotation += 0.01
+        }
     }
     
     //------------------------------------------------------------------------------------
@@ -445,6 +450,8 @@ class GameScene: SKScene {
         if(LevelSelect.preset == 4) {
             par = 12
             wall?.position = CGPoint(x:168.632, y:322.604)
+            wall?.size.height = 592.736
+            wall?.size.width = 114.724
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
             numShapes = 3
@@ -498,7 +505,39 @@ class GameScene: SKScene {
         
         //LEVEL 6
         if(LevelSelect.preset == 6) {
+            wall?.isHidden = false
+            wall?.position = CGPoint(x: 0, y:0)
+            wallIsRotating = true
+            //wall?.size.height = 150
+            //wall?.size.width = 450
             
+            par = 16
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
+            numShapes = 4
+            
+            blueDiamond?.isHidden = false
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
+            
+            purplePentagon?.isHidden = false
+            purpleGoal?.isHidden = false
+            purpleGoalBoy?.isHidden = false
+            
+            greyCircle?.position = CGPoint(x:0,y:530)
+            yellowTriangle?.position = CGPoint(x:225,y:325)
+            blueDiamond?.position = CGPoint(x:-225, y:-325)
+            redSquare?.position = CGPoint (x:-225, y:325)
+            purplePentagon?.position = CGPoint(x: 225, y: -325)
+            
+            yellowGoal?.position =  CGPoint(x:-310.357, y:-600.942)
+            yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
+            redGoal?.position = CGPoint(x:310.357, y:-600.942)
+            redGoalBoy?.position = CGPoint(x: 275,y: -567)
+            blueGoal?.position = CGPoint(x:310.358, y:563.838)
+            blueGoalBoy?.position = CGPoint(x: 275, y:567)
+            purpleGoal?.position = CGPoint(x:-310.358, y:563.838)
+            purpleGoalBoy?.position = CGPoint(x: -275, y:567)
         }
         
         //LEVEL 7
