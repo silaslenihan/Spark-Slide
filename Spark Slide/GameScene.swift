@@ -39,6 +39,7 @@ class GameScene: SKScene {
     var purpleGoalBoy:SKSpriteNode?
     var parLabel: SKLabelNode?
     var swipeLabel: SKLabelNode?
+    var swipeWall: SKSpriteNode?
 
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
@@ -52,6 +53,8 @@ class GameScene: SKScene {
     var levelButton:Bool = false
     var gamePaused:Bool = false
     var wallIsRotating: Bool = false
+    var wallIsSliding:Bool = false
+    var wallTimer = Timer()
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -88,6 +91,7 @@ class GameScene: SKScene {
         purpleGoalBoy = self.childNode(withName: "purpleGoalBoy") as? SKSpriteNode
         parLabel = self.childNode(withName: "parLabel") as? SKLabelNode
         swipeLabel = self.childNode(withName: "swipeLabel") as? SKLabelNode
+        swipeWall = self.childNode(withName: "swipeWall") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -342,6 +346,18 @@ class GameScene: SKScene {
         }
     }
     
+    @objc func slideWall() {
+        var newPoint = CGPoint(x:0,y:0)
+        if(Double((swipeWall?.position.x)!) <= 0.0) {
+            newPoint = CGPoint(x:300  , y: 0)
+        } else {
+            newPoint = CGPoint (x:-300, y:0)
+        }
+        let slideAction = SKAction.move(to: newPoint, duration: 2.0)
+        swipeWall?.run(slideAction)
+ 
+    }
+    
     //------------------------------------------------------------------------------------
     // levelSetup() - sets up levels and instance data for each level according to
     // LevelSelect.preset
@@ -364,6 +380,7 @@ class GameScene: SKScene {
         purplePentagon?.isHidden = true
         purpleGoal?.isHidden = true
         purpleGoalBoy?.isHidden = true
+        swipeWall?.isHidden = true
         
         yellowGoal?.position = CGPoint(x:-310.357, y:-600.941)
         yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
@@ -377,6 +394,7 @@ class GameScene: SKScene {
         purpleGoalBoy?.position = CGPoint(x:1000,y: 1000)
         
         wall?.position = CGPoint(x:1000, y:1000)
+        swipeWall?.position = CGPoint(x:1000, y:1000)
         oneStar?.position = CGPoint(x: 0 , y: 0)
         twoStars?.position = CGPoint(x: 0 , y: 0)
         threeStars?.position = CGPoint(x: 0 , y: 0)
@@ -508,9 +526,6 @@ class GameScene: SKScene {
             wall?.isHidden = false
             wall?.position = CGPoint(x: 0, y:0)
             wallIsRotating = true
-            //wall?.size.height = 150
-            //wall?.size.width = 450
-            
             par = 16
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
@@ -542,7 +557,10 @@ class GameScene: SKScene {
         
         //LEVEL 7
         if(LevelSelect.preset == 7) {
-            
+            swipeWall?.isHidden = false
+            swipeWall?.position = CGPoint (x:-200, y:0)
+            wallTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(slideWall), userInfo: nil, repeats: true)
+            slideWall()
         }
         
         //LEVEL 8
