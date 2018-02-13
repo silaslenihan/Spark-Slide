@@ -193,6 +193,7 @@ class GameScene: SKScene {
             }
             if(resetButton?.contains(touch.location(in: self)))! {
                 levelSetup()
+                swipeCount = 0
             }
             if(resume?.contains(touch.location(in: self)))! {
                 gamePaused = false
@@ -349,9 +350,9 @@ class GameScene: SKScene {
     @objc func slideWall() {
         var newPoint = CGPoint(x:0,y:0)
         if(Double((swipeWall?.position.x)!) <= 0.0) {
-            newPoint = CGPoint(x:300  , y: 0)
+            newPoint = CGPoint(x:300  , y: 115.755)
         } else {
-            newPoint = CGPoint (x:-300, y:0)
+            newPoint = CGPoint (x:-300, y:115.755)
         }
         let slideAction = SKAction.move(to: newPoint, duration: 2.0)
         swipeWall?.run(slideAction)
@@ -557,10 +558,36 @@ class GameScene: SKScene {
         
         //LEVEL 7
         if(LevelSelect.preset == 7) {
+            par = 12
+            numShapes = 4
+            
+            blueDiamond?.isHidden = false
+            purplePentagon?.isHidden = false
+            purpleGoal?.isHidden = false
+            purpleGoalBoy?.isHidden = false
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
             swipeWall?.isHidden = false
             swipeWall?.position = CGPoint (x:-200, y:0)
             wallTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(slideWall), userInfo: nil, repeats: true)
             slideWall()
+            
+            greyCircle?.position = CGPoint(x: 0, y:500)
+            purplePentagon?.position = CGPoint(x:280, y:320)
+            blueDiamond?.position = CGPoint(x:-280,y:320)
+            redSquare?.position = CGPoint(x:-100, y:320)
+            yellowTriangle?.position = CGPoint(x:100, y:320)
+            
+            swipeWall?.position = CGPoint(x:-200, y:115.755)
+            blueGoal?.position = CGPoint(x:293, y:-220)
+            blueGoalBoy?.position = CGPoint(x:275,y:-217)
+            purpleGoal?.position = CGPoint(x:-293,y:-220)
+            purpleGoalBoy?.position = CGPoint(x:-275,y:-217)
+            redGoal?.position = CGPoint(x:310.357,y:-600.942)
+            redGoalBoy?.position = CGPoint(x:275, y:-567)
+            yellowGoal?.position = CGPoint(x:-310.357,y:-600.942)
+            yellowGoalBoy?.position = CGPoint (x:-275, y:-567)
+            
         }
         
         //LEVEL 8
