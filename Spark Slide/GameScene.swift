@@ -174,11 +174,7 @@ class GameScene: SKScene {
         }
         
 
-        if(pauseButton?.contains(touch.location(in: self)))! {
-            greyCircle?.isHidden = true
-            yellowTriangle?.isHidden = true
-            redSquare?.isHidden = true
-            
+        if(pauseButton?.contains(touch.location(in: self)))! {            
             levelSelectButton?.isHidden = false
             resetButton?.isHidden = false
             resume?.isHidden = false
@@ -203,6 +199,7 @@ class GameScene: SKScene {
                 redSquare?.isHidden = false
                 greyCircle?.isHidden = false
                 yellowTriangle?.isHidden = false
+                slideWall()
             }
         }
         
@@ -349,14 +346,15 @@ class GameScene: SKScene {
     
     @objc func slideWall() {
         var newPoint = CGPoint(x:0,y:0)
-        if(Double((swipeWall?.position.x)!) <= 0.0) {
-            newPoint = CGPoint(x:300  , y: 115.755)
-        } else {
-            newPoint = CGPoint (x:-300, y:115.755)
+        if(!gamePaused) {
+            if(Double((swipeWall?.position.x)!) <= 0.0) {
+                newPoint = CGPoint(x:300  , y: 115.755)
+            } else {
+                newPoint = CGPoint (x:-300, y:115.755)
+            }
+            let slideAction = SKAction.move(to: newPoint, duration: 2.0)
+            swipeWall?.run(slideAction)
         }
-        let slideAction = SKAction.move(to: newPoint, duration: 2.0)
-        swipeWall?.run(slideAction)
- 
     }
     
     //------------------------------------------------------------------------------------
@@ -568,9 +566,15 @@ class GameScene: SKScene {
             blueGoal?.isHidden = false
             blueGoalBoy?.isHidden = false
             swipeWall?.isHidden = false
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false
             swipeWall?.position = CGPoint (x:-200, y:0)
-            wallTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(slideWall), userInfo: nil, repeats: true)
-            slideWall()
+            
+            if(!gamePaused)
+            {
+                wallTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(slideWall), userInfo: nil, repeats: true)
+                slideWall()
+            }
             
             greyCircle?.position = CGPoint(x: 0, y:500)
             purplePentagon?.position = CGPoint(x:280, y:320)
