@@ -37,6 +37,8 @@ class GameScene: SKScene {
     var purplePentagon: SKSpriteNode?
     var purpleGoal:SKSpriteNode?
     var purpleGoalBoy:SKSpriteNode?
+    var parLabel: SKLabelNode?
+    var swipeLabel: SKLabelNode?
 
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
@@ -83,6 +85,8 @@ class GameScene: SKScene {
         purplePentagon = self.childNode(withName: "purplePentagon") as? SKSpriteNode
         purpleGoal = self.childNode(withName: "purpleGoal") as? SKSpriteNode
         purpleGoalBoy = self.childNode(withName: "purpleGoalBoy") as? SKSpriteNode
+        parLabel = self.childNode(withName: "parLabel") as? SKLabelNode
+        swipeLabel = self.childNode(withName: "swipeLabel") as? SKLabelNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -142,10 +146,10 @@ class GameScene: SKScene {
     
     func nextLevel() {
         LevelSelect.preset += 1
+        swipeCount = -1
         levelSetup()
     }
     
-   
     //------------------------------------------------------------------------
     // touchesBegan() - allows for next level icons to be touched, resulting in
     // a change to the next screen.
@@ -210,6 +214,7 @@ class GameScene: SKScene {
     // the grey ball, and if so updates their properties accordingly.
     //------------------------------------------------------------------------
     override func update(_ currentTime: TimeInterval) {
+        swipeLabel?.text = ("moves: \(swipeCount)")
         //these bools mean whether their color is still in play
         var redYes: Bool = true
         var yellowYes:Bool = true
@@ -394,7 +399,6 @@ class GameScene: SKScene {
         blueDiamond?.physicsBody?.isDynamic = true
         purplePentagon?.physicsBody?.isDynamic = true
         
-        swipeCount = -1
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
         
@@ -526,6 +530,7 @@ class GameScene: SKScene {
         if(LevelSelect.preset == 12) {
             
         }
+        parLabel?.text = "par: \(par)"
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
