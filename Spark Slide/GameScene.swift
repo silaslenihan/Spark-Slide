@@ -40,7 +40,7 @@ class GameScene: SKScene {
     var parLabel: SKLabelNode?
     var swipeLabel: SKLabelNode?
     var swipeWall: SKSpriteNode?
-
+    var loading: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -55,6 +55,7 @@ class GameScene: SKScene {
     var wallIsRotating: Bool = false
     var wallIsSliding:Bool = false
     var wallTimer = Timer()
+    var loadingTimer = Timer()
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -92,6 +93,7 @@ class GameScene: SKScene {
         parLabel = self.childNode(withName: "parLabel") as? SKLabelNode
         swipeLabel = self.childNode(withName: "swipeLabel") as? SKLabelNode
         swipeWall = self.childNode(withName: "swipeWall") as? SKSpriteNode
+        loading = self.childNode(withName:"loading") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -102,6 +104,10 @@ class GameScene: SKScene {
         yellowTriangle?.physicsBody?.mass = 0.005
         blueDiamond?.physicsBody?.mass = 0.005
         purplePentagon?.physicsBody?.mass = 0.005
+        
+        loading?.position = CGPoint(x:0,y:0)
+        loading?.isHidden = true
+        
         nextLevelIcon?.isHidden = true
         oneStar?.isHidden = true
         twoStars?.isHidden = true
@@ -179,6 +185,9 @@ class GameScene: SKScene {
             resetButton?.isHidden = false
             resume?.isHidden = false
             
+            levelSelectButton?.position = CGPoint(x: 0,y: 430)
+            resetButton?.position = CGPoint(x:0,y:230)
+            resume?.position = CGPoint(x:0, y:30)
             gamePaused = true
             swipeCount -= 1
         
@@ -188,10 +197,16 @@ class GameScene: SKScene {
                 GameScene.myDelegate?.backButton()
             }
             if(resetButton?.contains(touch.location(in: self)))! {
+                print("reset")
+                wallTimer.invalidate()
                 levelSetup()
-                swipeCount = 0
+                swipeCount = -1
+                resetButton?.position = CGPoint(x:1000,y:1000)
+                resume?.position = CGPoint(x:1000,y:1000)
+                levelSelectButton?.position = CGPoint(x:1000,y:1000)
             }
             if(resume?.contains(touch.location(in: self)))! {
+                print("resume")
                 gamePaused = false
                 resume?.isHidden = true
                 levelSelectButton?.isHidden = true
@@ -201,6 +216,7 @@ class GameScene: SKScene {
                 yellowTriangle?.isHidden = false
                 slideWall()
             }
+            
         }
         
         if let label = self.label {
@@ -217,7 +233,9 @@ class GameScene: SKScene {
     // the grey ball, and if so updates their properties accordingly.
     //------------------------------------------------------------------------
     override func update(_ currentTime: TimeInterval) {
-        swipeLabel?.text = ("moves: \(swipeCount)")
+        if(swipeCount >= 0) {
+            swipeLabel?.text = ("moves: \(swipeCount)")
+        }
         //these bools mean whether their color is still in play
         var redYes: Bool = true
         var yellowYes:Bool = true
@@ -362,9 +380,8 @@ class GameScene: SKScene {
     // LevelSelect.preset
     //------------------------------------------------------------------------------------
     func levelSetup(){
-        
         greyCircle?.position = CGPoint(x: 0, y: 0)
-        
+        print("level setup")
         greyCircle?.isHidden = false
         zeroStars?.isHidden = true
         oneStar?.isHidden = true
@@ -380,7 +397,7 @@ class GameScene: SKScene {
         purpleGoal?.isHidden = true
         purpleGoalBoy?.isHidden = true
         swipeWall?.isHidden = true
-        
+        gamePaused = false
         yellowGoal?.position = CGPoint(x:-310.357, y:-600.941)
         yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
         redGoal?.position = CGPoint(x:310.357, y:-600.942)
@@ -391,6 +408,7 @@ class GameScene: SKScene {
         purplePentagon?.position = CGPoint(x: -1000, y: 1000)
         purpleGoal?.position = CGPoint(x:1000, y: 1000)
         purpleGoalBoy?.position = CGPoint(x:1000,y: 1000)
+        swipeWall?.position = CGPoint(x:1000,y:1000)
         
         wall?.position = CGPoint(x:1000, y:1000)
         swipeWall?.position = CGPoint(x:1000, y:1000)
@@ -423,6 +441,7 @@ class GameScene: SKScene {
         
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
+        
         
         //sets up location for each node, par, and number of shapes.
         

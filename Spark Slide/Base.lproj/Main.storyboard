@@ -246,7 +246,7 @@
         <scene sceneID="u6T-y3-gsn">
             <objects>
                 <viewController id="TeJ-Qg-BUE" customClass="HomeScreen" customModule="Spark_Slide" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleAspectFit" id="Hba-gR-OsI">
+                    <view key="view" contentMode="scaleToFill" id="Hba-gR-OsI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
