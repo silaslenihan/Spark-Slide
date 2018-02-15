@@ -9,6 +9,8 @@
 import SpriteKit
 import GameplayKit
 
+
+
 class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -41,6 +43,7 @@ class GameScene: SKScene {
     var swipeLabel: SKLabelNode?
     var swipeWall: SKSpriteNode?
     var loading: SKSpriteNode?
+    var rightWall: SKSpriteNode?
     
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -56,12 +59,13 @@ class GameScene: SKScene {
     var wallIsSliding:Bool = false
     var wallTimer = Timer()
     var loadingTimer = Timer()
+    var slideWallLeft:Bool = true
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
     var par: Int = 0
     var stars: Int = 0
-   
+    
     static var myDelegate : backButtonProtocol?
     
     override func didMove(to view: SKView) {
@@ -94,6 +98,7 @@ class GameScene: SKScene {
         swipeLabel = self.childNode(withName: "swipeLabel") as? SKLabelNode
         swipeWall = self.childNode(withName: "swipeWall") as? SKSpriteNode
         loading = self.childNode(withName:"loading") as? SKSpriteNode
+        rightWall = self.childNode(withName:"rightWall") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -104,6 +109,12 @@ class GameScene: SKScene {
         yellowTriangle?.physicsBody?.mass = 0.005
         blueDiamond?.physicsBody?.mass = 0.005
         purplePentagon?.physicsBody?.mass = 0.005
+        
+        greyCircle?.physicsBody?.restitution = 0.5
+        redSquare?.physicsBody?.restitution = 0.5
+        yellowTriangle?.physicsBody?.restitution = 0.5
+        blueDiamond?.physicsBody?.restitution = 0.5
+        purplePentagon?.physicsBody?.restitution = 0.5
         
         loading?.position = CGPoint(x:0,y:0)
         loading?.isHidden = true
@@ -150,7 +161,7 @@ class GameScene: SKScene {
         
         let vectorX: CGFloat = deltaX
         let vectorY: CGFloat = deltaY
-
+        
         let vector = CGVector(dx: vectorX, dy: vectorY)
         greyCircle?.physicsBody?.applyForce(vector)
     }
@@ -179,8 +190,8 @@ class GameScene: SKScene {
             }
         }
         
-
-        if(pauseButton?.contains(touch.location(in: self)))! {            
+        
+        if(pauseButton?.contains(touch.location(in: self)))! {
             levelSelectButton?.isHidden = false
             resetButton?.isHidden = false
             resume?.isHidden = false
@@ -190,7 +201,7 @@ class GameScene: SKScene {
             resume?.position = CGPoint(x:0, y:30)
             gamePaused = true
             swipeCount -= 1
-        
+            
         }
         if(gamePaused) {
             if(levelSelectButton?.contains(touch.location(in: self)))! {
@@ -214,7 +225,6 @@ class GameScene: SKScene {
                 redSquare?.isHidden = false
                 greyCircle?.isHidden = false
                 yellowTriangle?.isHidden = false
-                slideWall()
             }
             
         }
@@ -236,144 +246,33 @@ class GameScene: SKScene {
         if(swipeCount >= 0) {
             swipeLabel?.text = ("moves: \(swipeCount)")
         }
-        //these bools mean whether their color is still in play
-        var redYes: Bool = true
-        var yellowYes:Bool = true
-        var blueYes:Bool = true
-        var purpleYes:Bool = true
-        //checks whether is contacting grey ball
-        if(redYes) {
-            if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
-                redSquare?.isHidden = true
-                redSquare?.physicsBody?.isDynamic = false
-                redScored = true
-            }
-        }
-        if(yellowYes) {
-            if(yellowTriangle?.physicsBody?.allContactedBodies().contains((yellowGoal?.physicsBody)!))! {
-                yellowTriangle?.isHidden = true
-                yellowTriangle?.physicsBody?.isDynamic = false
-                yellowScored = true
-            }
-        }
-        
-        if(blueYes) {
-            if(blueDiamond?.physicsBody?.allContactedBodies().contains((blueGoal?.physicsBody)!))! {
-                blueDiamond?.isHidden = true
-                blueDiamond?.physicsBody?.isDynamic = false
-                blueScored = true
-            }
-        }
-        
-        if(purpleYes) {
-            if(purplePentagon?.physicsBody?.allContactedBodies().contains((purpleGoal?.physicsBody)!))! {
-                purplePentagon?.isHidden = true
-                purplePentagon?.physicsBody?.isDynamic = false
-                purpleScored = true
-            }
-        }
-        
-        //if red is scored, it means that that color is no longer in play
-        if(redScored)
-        {
-            redYes = false
-        }
-        if(yellowScored && yellowYes)
-        {
-            yellowYes = false
-        }
-        if(blueScored && blueYes)
-        {
-            blueYes = false
-        }
-        if(purpleScored && purpleYes)
-        {
-            purpleYes = false
-        }
-        
-        //runs once none of the colors are in play, checks how many stars there should be
-        if(numShapes == 0) {
-            numShapes = 1
-            
-            //means the level button will come up and be capable of being selected
-            levelButton = true
-
-            greyCircle?.isHidden = true
-            
-            //checks how many stars there should be depending on the par
-            if(swipeCount <= par) {
-                threeStars?.isHidden = false
-                print("three stars")
-            }
-            else if (swipeCount <= (par * 2)) {
-                twoStars?.isHidden = false
-                print ("two stars")
-            }
-            else if (swipeCount <= (par * 3)) {
-                oneStar?.isHidden = false
-                print("one star")
-            } else {
-                zeroStars?.isHidden = false
-                print("zero stars")
-            }
-
-            print(swipeCount)
-            redSquare?.position = CGPoint(x: 0, y: 0)
-            yellowTriangle?.position = CGPoint(x: 0, y: 0)
-            blueDiamond?.position = CGPoint(x: 0, y: 0)
-            
-        }
-        
-        //checks whether the color is still in play, if not subtracts for numShapes
-        if(!redYes ) {
-            numShapes -= 1
-            print("redMinus")
-            redSquare?.position = CGPoint(x: 1000, y: 1000)
-            redYes = false
-            redScored = false
-        }
-        
-        if(!yellowYes) {
-            numShapes -= 1
-            print("yellowMinus")
-            yellowTriangle?.position = CGPoint(x: 1000, y: 1000)
-            yellowYes = false
-            yellowScored = false
-        }
-        
-        if(!blueYes) {
-            numShapes -= 1
-            print("blueMinus")
-            blueDiamond?.position = CGPoint(x: 1000, y: 1000)
-            blueYes = false
-            blueScored = false
-        }
-        
-        if(!purpleYes) {
-            numShapes -= 1
-            print("purpleMinus")
-            purplePentagon?.position = CGPoint(x: 1000, y: 1000)
-            purpleYes = false
-            purpleScored = false
-        }
+       
+        shapeScore()
         
         if(wallIsRotating) {
             wall?.zRotation += 0.01
         }
-    }
-    
-    @objc func slideWall() {
-        var newPoint = CGPoint(x:0,y:0)
-        if(!gamePaused) {
-            if(Double((swipeWall?.position.x)!) <= 0.0) {
-                newPoint = CGPoint(x:300  , y: 115.755)
-            } else {
-                newPoint = CGPoint (x:-300, y:115.755)
-            }
-            let slideAction = SKAction.move(to: newPoint, duration: 2.0)
-            swipeWall?.run(slideAction)
+        
+        if(wallIsSliding) {
+            slidingWall()
         }
     }
+    
+    func slidingWall() {
+        if(slideWallLeft) {
+            swipeWall?.position.x += 2
+        } else {
+            swipeWall?.position.x -= 2
+        }
+        
+        if(Double((swipeWall?.position.x)!) >= 350.0) {
+            slideWallLeft = false
+        }
+        if(Double((swipeWall?.position.x)!) <= -350.0) {
+            slideWallLeft = true
+        }
+    }
+    
     
     //------------------------------------------------------------------------------------
     // levelSetup() - sets up levels and instance data for each level according to
@@ -522,7 +421,7 @@ class GameScene: SKScene {
             purplePentagon?.isHidden = false
             purpleGoal?.isHidden = false
             purpleGoalBoy?.isHidden = false
-                
+            
             greyCircle?.position = CGPoint(x:0,y:0)
             yellowTriangle?.position = CGPoint(x:0,y:-200)
             blueDiamond?.position = CGPoint(x:-200, y:0)
@@ -575,9 +474,9 @@ class GameScene: SKScene {
         
         //LEVEL 7
         if(LevelSelect.preset == 7) {
-            par = 12
+            par = 16
             numShapes = 4
-            
+            wallIsSliding = true
             blueDiamond?.isHidden = false
             purplePentagon?.isHidden = false
             purpleGoal?.isHidden = false
@@ -588,12 +487,6 @@ class GameScene: SKScene {
             redSquare?.isHidden = false
             yellowTriangle?.isHidden = false
             swipeWall?.position = CGPoint (x:-200, y:0)
-            
-            if(!gamePaused)
-            {
-                wallTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(slideWall), userInfo: nil, repeats: true)
-                slideWall()
-            }
             
             greyCircle?.position = CGPoint(x: 0, y:500)
             purplePentagon?.position = CGPoint(x:280, y:320)
@@ -640,6 +533,129 @@ class GameScene: SKScene {
         parLabel?.text = "par: \(par)"
     }
     
+    func shapeScore() {
+        //these bools mean whether their color is still in play
+        var redYes: Bool = true
+        var yellowYes:Bool = true
+        var blueYes:Bool = true
+        var purpleYes:Bool = true
+        //checks whether is contacting grey ball
+        if(redYes) {
+            if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
+                redSquare?.isHidden = true
+                redSquare?.physicsBody?.isDynamic = false
+                redScored = true
+            }
+        }
+        if(yellowYes) {
+            if(yellowTriangle?.physicsBody?.allContactedBodies().contains((yellowGoal?.physicsBody)!))! {
+                yellowTriangle?.isHidden = true
+                yellowTriangle?.physicsBody?.isDynamic = false
+                yellowScored = true
+            }
+        }
+        
+        if(blueYes) {
+            if(blueDiamond?.physicsBody?.allContactedBodies().contains((blueGoal?.physicsBody)!))! {
+                blueDiamond?.isHidden = true
+                blueDiamond?.physicsBody?.isDynamic = false
+                blueScored = true
+            }
+        }
+        
+        if(purpleYes) {
+            if(purplePentagon?.physicsBody?.allContactedBodies().contains((purpleGoal?.physicsBody)!))! {
+                purplePentagon?.isHidden = true
+                purplePentagon?.physicsBody?.isDynamic = false
+                purpleScored = true
+            }
+        }
+        
+        //if red is scored, it means that that color is no longer in play
+        if(redScored)
+        {
+            redYes = false
+        }
+        if(yellowScored && yellowYes)
+        {
+            yellowYes = false
+        }
+        if(blueScored && blueYes)
+        {
+            blueYes = false
+        }
+        if(purpleScored && purpleYes)
+        {
+            purpleYes = false
+        }
+        
+        //runs once none of the colors are in play, checks how many stars there should be
+        if(numShapes == 0) {
+            numShapes = 1
+            
+            //means the level button will come up and be capable of being selected
+            levelButton = true
+            
+            greyCircle?.isHidden = true
+            
+            //checks how many stars there should be depending on the par
+            if(swipeCount <= par) {
+                threeStars?.isHidden = false
+                print("three stars")
+            }
+            else if (swipeCount <= (par * 2)) {
+                twoStars?.isHidden = false
+                print ("two stars")
+            }
+            else if (swipeCount <= (par * 3)) {
+                oneStar?.isHidden = false
+                print("one star")
+            } else {
+                zeroStars?.isHidden = false
+                print("zero stars")
+            }
+            
+            print(swipeCount)
+            redSquare?.position = CGPoint(x: 0, y: 0)
+            yellowTriangle?.position = CGPoint(x: 0, y: 0)
+            blueDiamond?.position = CGPoint(x: 0, y: 0)
+            
+        }
+        
+        //checks whether the color is still in play, if not subtracts for numShapes
+        if(!redYes ) {
+            numShapes -= 1
+            print("redMinus")
+            redSquare?.position = CGPoint(x: 1000, y: 1000)
+            redYes = false
+            redScored = false
+        }
+        
+        if(!yellowYes) {
+            numShapes -= 1
+            print("yellowMinus")
+            yellowTriangle?.position = CGPoint(x: 1000, y: 1000)
+            yellowYes = false
+            yellowScored = false
+        }
+        
+        if(!blueYes) {
+            numShapes -= 1
+            print("blueMinus")
+            blueDiamond?.position = CGPoint(x: 1000, y: 1000)
+            blueYes = false
+            blueScored = false
+        }
+        
+        if(!purpleYes) {
+            numShapes -= 1
+            print("purpleMinus")
+            purplePentagon?.position = CGPoint(x: 1000, y: 1000)
+            purpleYes = false
+            purpleScored = false
+        }
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
@@ -658,3 +674,4 @@ class GameScene: SKScene {
 protocol backButtonProtocol {
     func backButton()
 }
+
