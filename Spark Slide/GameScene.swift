@@ -12,7 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
-    
+
     var background: SKSpriteNode?
     var redSquare: SKSpriteNode?
     var greyCircle: SKSpriteNode?
@@ -113,6 +113,7 @@ class GameScene: SKScene {
         yellowTriangle?.physicsBody?.restitution = 0.5
         blueDiamond?.physicsBody?.restitution = 0.5
         purplePentagon?.physicsBody?.restitution = 0.5
+
         
         loading?.position = CGPoint(x:0,y:0)
         loading?.isHidden = true
@@ -232,10 +233,9 @@ class GameScene: SKScene {
         }
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+    
+    
     }
-    
-    
-    
     //------------------------------------------------------------------------
     // update() - checks every frame for whether each shape is being touched by
     // the grey ball, and if so updates their properties accordingly.
