@@ -108,12 +108,11 @@ class GameScene: SKScene {
         blueDiamond?.physicsBody?.mass = 0.005
         purplePentagon?.physicsBody?.mass = 0.005
         
-        greyCircle?.physicsBody?.restitution = 0.5
-        redSquare?.physicsBody?.restitution = 0.5
-        yellowTriangle?.physicsBody?.restitution = 0.5
-        blueDiamond?.physicsBody?.restitution = 0.5
-        purplePentagon?.physicsBody?.restitution = 0.5
-
+        greyCircle?.physicsBody?.restitution = 0.25
+        redSquare?.physicsBody?.restitution = 0.25
+        yellowTriangle?.physicsBody?.restitution = 0.25
+        blueDiamond?.physicsBody?.restitution = 0.25
+        purplePentagon?.physicsBody?.restitution = 0.25
         
         loading?.position = CGPoint(x:0,y:0)
         loading?.isHidden = true
@@ -127,6 +126,9 @@ class GameScene: SKScene {
         nextLevelIcon?.isUserInteractionEnabled = false
         
         levelSetup()
+        
+        redSquare?.physicsBody?.collisionBitMask = 0b10
+        
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -244,7 +246,8 @@ class GameScene: SKScene {
         if(swipeCount >= 0) {
             swipeLabel?.text = ("moves: \(swipeCount)")
         }
-       
+        
+        stopCollision()
         shapeScore()
         
         if(wallIsRotating) {
@@ -338,7 +341,6 @@ class GameScene: SKScene {
         
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
-        
         
         //sets up location for each node, par, and number of shapes.
         
@@ -531,12 +533,17 @@ class GameScene: SKScene {
         parLabel?.text = "par: \(par)"
     }
     
+    func wallStop(shape: SKSpriteNode){
+        
+    }
+    
     func shapeScore() {
         //these bools mean whether their color is still in play
         var redYes: Bool = true
         var yellowYes:Bool = true
         var blueYes:Bool = true
         var purpleYes:Bool = true
+
         //checks whether is contacting grey ball
         if(redYes) {
             if(redSquare?.physicsBody?.allContactedBodies().contains((redGoal?.physicsBody)!))! {
@@ -587,6 +594,38 @@ class GameScene: SKScene {
             purpleYes = false
         }
         
+        if(!redYes ) {
+            numShapes -= 1
+            print("redMinus")
+            redSquare?.position = CGPoint(x: 1000, y: 1000)
+            redYes = false
+            redScored = false
+        }
+        
+        if(!yellowYes) {
+            numShapes -= 1
+            print("yellowMinus")
+            yellowTriangle?.position = CGPoint(x: 1000, y: 1000)
+            yellowYes = false
+            yellowScored = false
+        }
+        
+        if(!blueYes) {
+            numShapes -= 1
+            print("blueMinus")
+            blueDiamond?.position = CGPoint(x: 1000, y: 1000)
+            blueYes = false
+            blueScored = false
+        }
+        
+        if(!purpleYes) {
+            numShapes -= 1
+            print("purpleMinus")
+            purplePentagon?.position = CGPoint(x: 1000, y: 1000)
+            purpleYes = false
+            purpleScored = false
+        }
+        
         //runs once none of the colors are in play, checks how many stars there should be
         if(numShapes == 0) {
             numShapes = 1
@@ -621,39 +660,31 @@ class GameScene: SKScene {
         }
         
         //checks whether the color is still in play, if not subtracts for numShapes
-        if(!redYes ) {
-            numShapes -= 1
-            print("redMinus")
-            redSquare?.position = CGPoint(x: 1000, y: 1000)
-            redYes = false
-            redScored = false
-        }
         
-        if(!yellowYes) {
-            numShapes -= 1
-            print("yellowMinus")
-            yellowTriangle?.position = CGPoint(x: 1000, y: 1000)
-            yellowYes = false
-            yellowScored = false
-        }
-        
-        if(!blueYes) {
-            numShapes -= 1
-            print("blueMinus")
-            blueDiamond?.position = CGPoint(x: 1000, y: 1000)
-            blueYes = false
-            blueScored = false
-        }
-        
-        if(!purpleYes) {
-            numShapes -= 1
-            print("purpleMinus")
-            purplePentagon?.position = CGPoint(x: 1000, y: 1000)
-            purpleYes = false
-            purpleScored = false
-        }
     }
     
+    func stopCollision () {
+        if(redSquare?.physicsBody?.allContactedBodies().contains((redGoalBoy?.physicsBody)!))! {
+            redSquare?.physicsBody?.collisionBitMask = 0
+        } else {
+            redSquare?.physicsBody?.collisionBitMask = 2
+        }
+        if(yellowTriangle?.physicsBody?.allContactedBodies().contains((yellowGoalBoy?.physicsBody)!))! {
+            yellowTriangle?.physicsBody?.collisionBitMask = 0
+        } else {
+            yellowTriangle?.physicsBody?.collisionBitMask = 2
+        }
+        if(blueDiamond?.physicsBody?.allContactedBodies().contains((blueGoalBoy?.physicsBody)!))! {
+            blueDiamond?.physicsBody?.collisionBitMask = 0
+        } else {
+            blueDiamond?.physicsBody?.collisionBitMask = 2
+        }
+        if(purplePentagon?.physicsBody?.allContactedBodies().contains((purpleGoalBoy?.physicsBody)!))! {
+            purplePentagon?.physicsBody?.collisionBitMask = 0
+        } else {
+            purplePentagon?.physicsBody?.collisionBitMask = 2
+        }
+    }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
