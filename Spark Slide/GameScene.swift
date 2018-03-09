@@ -42,9 +42,20 @@ class GameScene: SKScene {
     var swipeWall: SKSpriteNode?
     var loading: SKSpriteNode?
     var rightWall: SKSpriteNode?
-    
+    var leftWall: SKSpriteNode?
+    var topWall: SKSpriteNode?
+    var bottomWall: SKSpriteNode?
+    var corner1: SKSpriteNode?
+    var corner2: SKSpriteNode?
+    var corner3: SKSpriteNode?
+    var corner4: SKSpriteNode?
+
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
+    var topLeft = CGPoint(x: -355.467, y:641)
+    var bottomLeft = CGPoint(x: -355.467, y:-641)
+    var topRight = CGPoint(x: 355.467, y:641)
+    var bottomRight = CGPoint(x: 355.467, y:-641)
     
     var redScored:Bool = false
     var yellowScored:Bool = false
@@ -97,6 +108,13 @@ class GameScene: SKScene {
         swipeWall = self.childNode(withName: "swipeWall") as? SKSpriteNode
         loading = self.childNode(withName:"loading") as? SKSpriteNode
         rightWall = self.childNode(withName:"rightWall") as? SKSpriteNode
+        leftWall = self.childNode(withName:"leftWall") as? SKSpriteNode
+        bottomWall = self.childNode(withName:"bottomWall") as? SKSpriteNode
+        topWall = self.childNode(withName:"topWall") as? SKSpriteNode
+        corner1 = self.childNode(withName:"corner1") as? SKSpriteNode
+        corner2 = self.childNode(withName:"corner2") as? SKSpriteNode
+        corner3 = self.childNode(withName:"corner3") as? SKSpriteNode
+        corner4 = self.childNode(withName:"corner4") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -126,9 +144,6 @@ class GameScene: SKScene {
         nextLevelIcon?.isUserInteractionEnabled = false
         
         levelSetup()
-        
-        redSquare?.physicsBody?.collisionBitMask = 0b10
-        
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -247,7 +262,11 @@ class GameScene: SKScene {
             swipeLabel?.text = ("moves: \(swipeCount)")
         }
         
-        stopCollision()
+        stopCollision(node: redSquare!, goal: redGoal!)
+        stopCollision(node: yellowTriangle!, goal: yellowGoal!)
+        stopCollision(node: blueDiamond!, goal: blueGoal!)
+        stopCollision(node: purplePentagon!, goal: purpleGoal!)
+        
         shapeScore()
         
         if(wallIsRotating) {
@@ -320,6 +339,19 @@ class GameScene: SKScene {
         resetButton?.position = CGPoint(x:0,y:230)
         resume?.position = CGPoint(x:0, y:30)
         
+        corner1?.position = CGPoint(x:1000, y:1000)
+        corner1?.isHidden = true
+        corner1?.zRotation = -90
+        corner2?.position = CGPoint(x:1000, y:1000)
+        corner2?.isHidden = true
+        corner2?.zRotation = -180
+        corner3?.position = CGPoint(x:1000, y:1000)
+        corner3?.isHidden = true
+        corner3?.zRotation = 0
+        corner4?.position = CGPoint(x:1000, y:1000)
+        corner4?.isHidden = true
+        corner4?.zRotation = 90
+        
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
@@ -346,6 +378,8 @@ class GameScene: SKScene {
         
         //LEVEL 1
         if(LevelSelect.preset == 1) {
+            corner1?.position = topLeft
+            corner2?.position = topRight
             swipeCount = 0
             par = 5
             redSquare?.isHidden = false
@@ -663,26 +697,16 @@ class GameScene: SKScene {
         
     }
     
-    func stopCollision () {
-        if(redSquare?.physicsBody?.allContactedBodies().contains((redGoalBoy?.physicsBody)!))! {
-            redSquare?.physicsBody?.collisionBitMask = 0
+    func stopCollision (node: SKSpriteNode, goal: SKSpriteNode) {
+        let check1: Bool = (node.physicsBody?.allContactedBodies().contains((topWall?.physicsBody)!))!
+        let check2: Bool = (node.physicsBody?.allContactedBodies().contains((bottomWall?.physicsBody)!))!
+        let check3: Bool = (node.physicsBody?.allContactedBodies().contains((leftWall?.physicsBody)!))!
+        let check4: Bool = (node.physicsBody?.allContactedBodies().contains((rightWall?.physicsBody)!))!
+        let check5: Bool = (node.physicsBody?.allContactedBodies().contains((goal.physicsBody)!))!
+        if(!check1 && !check2 && !check3 && !check4 && check5) {
+            node.physicsBody?.collisionBitMask = 0
         } else {
-            redSquare?.physicsBody?.collisionBitMask = 2
-        }
-        if(yellowTriangle?.physicsBody?.allContactedBodies().contains((yellowGoalBoy?.physicsBody)!))! {
-            yellowTriangle?.physicsBody?.collisionBitMask = 0
-        } else {
-            yellowTriangle?.physicsBody?.collisionBitMask = 2
-        }
-        if(blueDiamond?.physicsBody?.allContactedBodies().contains((blueGoalBoy?.physicsBody)!))! {
-            blueDiamond?.physicsBody?.collisionBitMask = 0
-        } else {
-            blueDiamond?.physicsBody?.collisionBitMask = 2
-        }
-        if(purplePentagon?.physicsBody?.allContactedBodies().contains((purpleGoalBoy?.physicsBody)!))! {
-            purplePentagon?.physicsBody?.collisionBitMask = 0
-        } else {
-            purplePentagon?.physicsBody?.collisionBitMask = 2
+            node.physicsBody?.collisionBitMask = 2
         }
     }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
