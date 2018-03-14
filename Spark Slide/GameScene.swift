@@ -45,10 +45,10 @@ class GameScene: SKScene {
     var leftWall: SKSpriteNode?
     var topWall: SKSpriteNode?
     var bottomWall: SKSpriteNode?
-    var corner1: SKSpriteNode?
-    var corner2: SKSpriteNode?
-    var corner3: SKSpriteNode?
-    var corner4: SKSpriteNode?
+    var barrier1: SKSpriteNode?
+    var barrier2: SKSpriteNode?
+    var barrier3: SKSpriteNode?
+    var barrier4: SKSpriteNode?
 
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -111,10 +111,10 @@ class GameScene: SKScene {
         leftWall = self.childNode(withName:"leftWall") as? SKSpriteNode
         bottomWall = self.childNode(withName:"bottomWall") as? SKSpriteNode
         topWall = self.childNode(withName:"topWall") as? SKSpriteNode
-        corner1 = self.childNode(withName:"corner1") as? SKSpriteNode
-        corner2 = self.childNode(withName:"corner2") as? SKSpriteNode
-        corner3 = self.childNode(withName:"corner3") as? SKSpriteNode
-        corner4 = self.childNode(withName:"corner4") as? SKSpriteNode
+        barrier1 = self.childNode(withName:"barrier1") as? SKSpriteNode
+        barrier2 = self.childNode(withName:"barrier2") as? SKSpriteNode
+        barrier3 = self.childNode(withName:"barrier3") as? SKSpriteNode
+        barrier4 = self.childNode(withName:"barrier4") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -339,26 +339,13 @@ class GameScene: SKScene {
         resetButton?.position = CGPoint(x:0,y:230)
         resume?.position = CGPoint(x:0, y:30)
         
-        corner1?.position = CGPoint(x:1000, y:1000)
-        corner1?.isHidden = true
-        corner1?.zRotation = -90
-        corner2?.position = CGPoint(x:1000, y:1000)
-        corner2?.isHidden = true
-        corner2?.zRotation = -180
-        corner3?.position = CGPoint(x:1000, y:1000)
-        corner3?.isHidden = true
-        corner3?.zRotation = 0
-        corner4?.position = CGPoint(x:1000, y:1000)
-        corner4?.isHidden = true
-        corner4?.zRotation = 90
-        
         levelButton = false
         redSquare?.physicsBody?.isDynamic = true
         yellowTriangle?.physicsBody?.isDynamic = true
         
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
-        blueDiamond?.zRotation = 0
+        blueDiamond?.zRotation = 45
         purplePentagon?.zRotation = 0
         
         redSquare?.physicsBody?.isDynamic = false
@@ -371,6 +358,11 @@ class GameScene: SKScene {
         blueDiamond?.physicsBody?.isDynamic = true
         purplePentagon?.physicsBody?.isDynamic = true
         
+        barrier1?.isHidden = true
+        barrier2?.isHidden = true
+        barrier3?.isHidden = true
+        barrier4?.isHidden = true
+        
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
         
@@ -378,8 +370,6 @@ class GameScene: SKScene {
         
         //LEVEL 1
         if(LevelSelect.preset == 1) {
-            corner1?.position = topLeft
-            corner2?.position = topRight
             swipeCount = 0
             par = 5
             redSquare?.isHidden = false
