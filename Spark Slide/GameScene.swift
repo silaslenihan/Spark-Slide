@@ -188,6 +188,13 @@ class GameScene: SKScene {
         levelSetup()
     }
     
+    
+    
+    
+    
+    
+    
+    
     //------------------------------------------------------------------------
     // touchesBegan() - allows for next level icons to be touched, resulting in
     // a change to the next screen.
@@ -253,6 +260,14 @@ class GameScene: SKScene {
     
     
     }
+    
+    
+    
+    
+    
+    
+    
+    
     //------------------------------------------------------------------------
     // update() - checks every frame for whether each shape is being touched by
     // the grey ball, and if so updates their properties accordingly.
@@ -292,6 +307,13 @@ class GameScene: SKScene {
             slideWallLeft = true
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     //------------------------------------------------------------------------------------
@@ -557,9 +579,22 @@ class GameScene: SKScene {
         parLabel?.text = "par: \(par)"
     }
     
+    
+    
+    
+    
+    
+    
     func wallStop(shape: SKSpriteNode){
         
     }
+    
+    
+    
+    
+    
+    
+    
     
     func shapeScore() {
         //these bools mean whether their color is still in play
@@ -663,6 +698,7 @@ class GameScene: SKScene {
             if(swipeCount <= par) {
                 threeStars?.isHidden = false
                 print("three stars")
+                
             }
             else if (swipeCount <= (par * 2)) {
                 twoStars?.isHidden = false
@@ -687,6 +723,13 @@ class GameScene: SKScene {
         
     }
     
+    
+    
+    
+    
+    
+    
+    
     func stopCollision (node: SKSpriteNode, goal: SKSpriteNode) {
         let check1: Bool = (node.physicsBody?.allContactedBodies().contains((topWall?.physicsBody)!))!
         let check2: Bool = (node.physicsBody?.allContactedBodies().contains((bottomWall?.physicsBody)!))!
@@ -699,20 +742,44 @@ class GameScene: SKScene {
             node.physicsBody?.collisionBitMask = 2
         }
     }
+    
+    
+    
+    
+    
+    
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
         }
     }
     
+    
+    
+    
+    
+    
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
+    
+    
+    
+    
+    
+    
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
 }
+
+
+
+
+
 
 protocol backButtonProtocol {
     func backButton()
