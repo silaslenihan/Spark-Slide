@@ -75,6 +75,8 @@ class GameScene: SKScene {
     var par: Int = 0
     var stars: Int = 0
     
+
+    
     static var myDelegate : backButtonProtocol?
     
     override func didMove(to view: SKView) {
@@ -201,6 +203,7 @@ class GameScene: SKScene {
     //------------------------------------------------------------------------
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
+        let nodes: [SKSpriteNode] = [greyCircle!,redSquare!,yellowTriangle!,purplePentagon!,blueDiamond!,redGoal!,yellowGoal!,blueGoal!,purpleGoal!,redGoalBoy!,blueGoalBoy!,yellowGoalBoy!,purpleGoalBoy!]
         if(levelButton == true) {
             if (zeroStars?.contains(touch.location(in: self)))! {
                 nextLevel()
@@ -225,6 +228,11 @@ class GameScene: SKScene {
             gamePaused = true
             swipeCount -= 1
             
+            
+            for n in nodes {
+                n.physicsBody?.isDynamic = false
+                n.physicsBody?.isDynamic = true
+            }
         }
         if(gamePaused) {
             if(levelSelectButton?.contains(touch.location(in: self)))! {
