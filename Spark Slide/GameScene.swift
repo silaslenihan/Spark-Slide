@@ -69,6 +69,11 @@ class GameScene: SKScene {
     var wallTimer = Timer()
     var loadingTimer = Timer()
     var slideWallLeft:Bool = true
+    var goalSlideLeft:Bool = true
+    var redGoalSlide:Bool = false
+    var blueGoalSlide:Bool = false
+    var yellowGoalSlide:Bool = false
+    var purpleGoalSlide:Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -299,6 +304,20 @@ class GameScene: SKScene {
         if(wallIsSliding) {
             slidingWall()
         }
+        
+        if(redGoalSlide) {
+            goalSlide(goal: redGoal!, goalBoy: redGoalBoy!)
+        }
+        if(yellowGoalSlide) {
+            goalSlide(goal: yellowGoal!, goalBoy: yellowGoalBoy!)
+        }
+        if(blueGoalSlide) {
+            goalSlide(goal: blueGoal!, goalBoy: blueGoalBoy!)
+        }
+        if(purpleGoalSlide) {
+            goalSlide(goal: purpleGoal!, goalBoy: purpleGoalBoy!)
+        }
+        
     }
     
     func slidingWall() {
@@ -392,6 +411,11 @@ class GameScene: SKScene {
         barrier2?.isHidden = true
         barrier3?.isHidden = true
         barrier4?.isHidden = true
+        
+        redGoalSlide = false
+        blueGoalSlide = false
+        yellowGoalSlide = false
+        purpleGoalSlide = false
         
         redSquare?.zRotation = 0
         yellowTriangle?.zRotation = 0
@@ -562,7 +586,15 @@ class GameScene: SKScene {
         
         //LEVEL 8
         if(LevelSelect.preset == 8) {
-            
+            par = 16
+            numShapes = 3
+            greyCircle?.position = CGPoint(x: 0, y:500)
+            redGoalBoy?.position = CGPoint(x:0, y:-542)
+            redGoal?.position = CGPoint(x:0, y:-592)
+            redSquare?.position = CGPoint(x:0,y:0)
+            yellowGoal?.position = CGPoint(x: -1000,y:-1000)
+            yellowGoalBoy?.position = CGPoint(x:-1000,y:-1000)
+            redGoalSlide = true
         }
         
         //LEVEL 9
@@ -602,7 +634,22 @@ class GameScene: SKScene {
     
     
     
-    
+    func goalSlide(goal: SKSpriteNode,goalBoy:SKSpriteNode) {
+        if(goalSlideLeft) {
+            goal.position.x += 2
+            goalBoy.position.x += 2
+        } else {
+            goal.position.x -= 2
+            goalBoy.position.x -= 2
+        }
+        
+        if(Double((goal.position.x)) >= 350.0) {
+            goalSlideLeft = false
+        }
+        if(Double((goal.position.x)) <= -350.0) {
+            goalSlideLeft = true
+        }
+    }
     
     func shapeScore() {
         //these bools mean whether their color is still in play
