@@ -13,6 +13,7 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
 
+    static var starCount:Int = 0
     var background: SKSpriteNode?
     var redSquare: SKSpriteNode?
     var greyCircle: SKSpriteNode?
@@ -79,7 +80,6 @@ class GameScene: SKScene {
     var swipeCount:Int = 0
     var par: Int = 0
     var stars: Int = 0
-    
 
     
     static var myDelegate : backButtonProtocol?
@@ -151,6 +151,12 @@ class GameScene: SKScene {
         nextLevelIcon?.isUserInteractionEnabled = false
         
         levelSetup()
+        
+        stars =  UserDefaults.standard.integer(forKey: "starsKey")
+    }
+    
+    struct defaultKeys {
+        static let stars = "starsKey"
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -189,13 +195,14 @@ class GameScene: SKScene {
         greyCircle?.physicsBody?.applyForce(vector)
     }
     
+    //--------------------------------------------------------------------------------
+    // nextLevel() - is called to send it to the next level=
+    //--------------------------------------------------------------------------------
     func nextLevel() {
         LevelSelect.preset += 1
         swipeCount = -1
         levelSetup()
     }
-    
-    
     
     
     
@@ -208,17 +215,16 @@ class GameScene: SKScene {
     //------------------------------------------------------------------------
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
-        let nodes: [SKSpriteNode] = [greyCircle!,redSquare!,yellowTriangle!,purplePentagon!,blueDiamond!,redGoal!,yellowGoal!,blueGoal!,purpleGoal!,redGoalBoy!,blueGoalBoy!,yellowGoalBoy!,purpleGoalBoy!]
+        let nodes: [SKSpriteNode] = [greyCircle!,redSquare!,yellowTriangle!,purplePentagon!,blueDiamond!]
         if(levelButton == true) {
-            if (zeroStars?.contains(touch.location(in: self)))! {
-                nextLevel()
-            } else if (oneStar?.contains(touch.location(in: self)))! {
-                self.nextLevel()
-            } else if (twoStars?.contains(touch.location(in: self)))! {
-                nextLevel()
-            } else if (threeStars?.contains(touch.location(in: self)))! {
-                nextLevel()
+            let starArray = [zeroStars,oneStar,twoStars,threeStars]
+            
+            for star in starArray {
+                if(star?.contains(touch.location(in: self)))! {
+                    nextLevel()
+                }
             }
+           
         }
         
         
@@ -232,7 +238,9 @@ class GameScene: SKScene {
             resume?.position = CGPoint(x:0, y:30)
             gamePaused = true
             swipeCount -= 1
-            
+            pauseButton?.position = CGPoint(x:-1000,y:1000)
+            swipeLabel?.isHidden = true
+            parLabel?.isHidden = true
             
             for n in nodes {
                 n.physicsBody?.isDynamic = false
@@ -261,6 +269,9 @@ class GameScene: SKScene {
                 redSquare?.isHidden = false
                 greyCircle?.isHidden = false
                 yellowTriangle?.isHidden = false
+                pauseButton?.position = CGPoint(x:0,y:604.965)
+                swipeLabel?.isHidden = false
+                parLabel?.isHidden = false
             }
             
         }
@@ -320,6 +331,10 @@ class GameScene: SKScene {
         
     }
     
+    //--------------------------------------------------------------------------------
+    // slidingWall() - makes the swipeWall node slide from left to right if the
+    // slideWallLeft bool is true
+    //--------------------------------------------------------------------------------
     func slidingWall() {
         if(slideWallLeft) {
             swipeWall?.position.x += 2
@@ -366,6 +381,9 @@ class GameScene: SKScene {
         purpleGoalBoy?.isHidden = true
         swipeWall?.isHidden = true
         gamePaused = false
+        pauseButton?.position = CGPoint(x:0,y:604.965)
+        swipeLabel?.isHidden = false
+        parLabel?.isHidden = false
         yellowGoal?.position = CGPoint(x:-310.357, y:-600.941)
         yellowGoalBoy?.position = CGPoint(x:-275, y:-567)
         redGoal?.position = CGPoint(x:310.357, y:-600.942)
@@ -586,15 +604,25 @@ class GameScene: SKScene {
         
         //LEVEL 8
         if(LevelSelect.preset == 8) {
-            par = 16
+            par = 5
             numShapes = 3
             greyCircle?.position = CGPoint(x: 0, y:500)
             redGoalBoy?.position = CGPoint(x:0, y:-542)
             redGoal?.position = CGPoint(x:0, y:-592)
-            redSquare?.position = CGPoint(x:0,y:0)
-            yellowGoal?.position = CGPoint(x: -1000,y:-1000)
-            yellowGoalBoy?.position = CGPoint(x:-1000,y:-1000)
+            redSquare?.position = CGPoint(x:0,y:225)
+            yellowGoal?.position = CGPoint(x: -300,y:592)
+            yellowGoalBoy?.position = CGPoint(x:-250,y:542)
+            blueGoal?.position = CGPoint(x:300,y:592)
+            blueGoalBoy?.position = CGPoint(x:250,y:542)
+            blueDiamond?.position = CGPoint(x:230,y:-230)
+            yellowTriangle?.position = CGPoint(x:-230,y:-230)
+            swipeWall?.position = CGPoint(x:0,y:12)
+            swipeWall?.isHidden = false
+            wallIsSliding = true
             redGoalSlide = true
+            blueGoal?.isHidden = false
+            blueGoalBoy?.isHidden = false
+            blueDiamond?.isHidden = false
         }
         
         //LEVEL 9
@@ -642,7 +670,7 @@ class GameScene: SKScene {
             goal.position.x -= 2
             goalBoy.position.x -= 2
         }
-        
+    
         if(Double((goal.position.x)) >= 350.0) {
             goalSlideLeft = false
         }
@@ -753,20 +781,26 @@ class GameScene: SKScene {
             if(swipeCount <= par) {
                 threeStars?.isHidden = false
                 print("three stars")
-                
+                stars = 3
             }
             else if (swipeCount <= (par * 2)) {
                 twoStars?.isHidden = false
                 print ("two stars")
+                stars = 2
             }
             else if (swipeCount <= (par * 3)) {
                 oneStar?.isHidden = false
                 print("one star")
+                stars = 1
             } else {
                 zeroStars?.isHidden = false
                 print("zero stars")
             }
             
+            let oldStars = UserDefaults.standard.integer(forKey: "starsKey")
+            UserDefaults.standard.set(oldStars + stars, forKey: "starsKey")
+            GameScene.starCount = UserDefaults.standard.integer(forKey: "starsKey")
+            stars = 0
             print(swipeCount)
             redSquare?.position = CGPoint(x: 0, y: 0)
             yellowTriangle?.position = CGPoint(x: 0, y: 0)

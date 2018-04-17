@@ -38,6 +38,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTW-4L-8Zx">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -186,6 +187,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stars: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFA-qq-oHO">
+                                <rect key="frame" x="4" y="67" width="92" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="zKF-H2-k3N"/>
@@ -203,11 +211,12 @@
                         <outlet property="levelThree" destination="zne-GL-xpN" id="XjI-ly-YDa"/>
                         <outlet property="levelTwelve" destination="Vxa-mH-Xq1" id="tTk-6L-8PQ"/>
                         <outlet property="levelTwo" destination="6eX-mB-Qsf" id="hbx-G1-hwe"/>
+                        <outlet property="starsCount" destination="IFA-qq-oHO" id="abt-CX-cTh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8s-N4-Ods" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="890"/>
+            <point key="canvasLocation" x="956" y="889.20539730134942"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">

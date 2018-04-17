@@ -15,6 +15,7 @@ class LevelSelect: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
+        starsCount.text = "stars: \(String(GameScene.starCount))"
     }
    
     
@@ -61,6 +62,7 @@ class LevelSelect: UIViewController {
     
   
 
+    @IBOutlet weak var starsCount: UILabel!
     @IBOutlet weak var levelOne: UIButton!
     @IBOutlet weak var levelTwo: UIButton!
     @IBOutlet weak var levelThree: UIButton!
