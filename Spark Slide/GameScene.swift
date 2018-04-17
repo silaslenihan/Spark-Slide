@@ -75,6 +75,7 @@ class GameScene: SKScene {
     var blueGoalSlide:Bool = false
     var yellowGoalSlide:Bool = false
     var purpleGoalSlide:Bool = false
+    var pauseHit: Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -169,11 +170,12 @@ class GameScene: SKScene {
     
     func touchUp(atPoint pos : CGPoint) {
         touchEnd = pos
-        greyCircle?.physicsBody?.velocity = CGVector(dx: (greyCircle?.anchorPoint.x)!, dy: (greyCircle?.anchorPoint.y)!)
-        greyCircle?.physicsBody?.angularVelocity = 0.0
-        if(!gamePaused) {
+      
+        if((gamePaused == false) && (pauseHit == false)) {
             swipeCount += 1
             move()
+            print(pauseHit)
+            greyCircle?.physicsBody?.velocity = CGVector(dx: (greyCircle?.anchorPoint.x)!, dy: (greyCircle?.anchorPoint.y)!)
         }
     }
     
@@ -215,7 +217,7 @@ class GameScene: SKScene {
     //------------------------------------------------------------------------
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
-        let nodes: [SKSpriteNode] = [greyCircle!,redSquare!,yellowTriangle!,purplePentagon!,blueDiamond!]
+       
         if(levelButton == true) {
             let starArray = [zeroStars,oneStar,twoStars,threeStars]
             
@@ -241,11 +243,6 @@ class GameScene: SKScene {
             pauseButton?.position = CGPoint(x:-1000,y:1000)
             swipeLabel?.isHidden = true
             parLabel?.isHidden = true
-            
-            for n in nodes {
-                n.physicsBody?.isDynamic = false
-                n.physicsBody?.isDynamic = true
-            }
         }
         if(gamePaused) {
             if(levelSelectButton?.contains(touch.location(in: self)))! {
