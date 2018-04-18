@@ -75,7 +75,8 @@ class GameScene: SKScene {
     var blueGoalSlide:Bool = false
     var yellowGoalSlide:Bool = false
     var purpleGoalSlide:Bool = false
-    var pauseHit: Bool = false
+    var pauseHit: Bool = true
+    var see: Bool = true
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -170,8 +171,11 @@ class GameScene: SKScene {
     
     func touchUp(atPoint pos : CGPoint) {
         touchEnd = pos
-      
-        if((gamePaused == false) && (pauseHit == false)) {
+        
+        if(see == true) {
+            pauseHit = true
+        }
+        if((gamePaused == false) && (pauseHit)) {
             swipeCount += 1
             move()
             print(pauseHit)
@@ -217,16 +221,17 @@ class GameScene: SKScene {
     //------------------------------------------------------------------------
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
-       
+        
+        var done: Bool = false
         if(levelButton == true) {
             let starArray = [zeroStars,oneStar,twoStars,threeStars]
-            
             for star in starArray {
-                if(star?.contains(touch.location(in: self)))! {
+                if((star?.contains(touch.location(in: self)))! && !done) {
                     nextLevel()
+                    print("next level")
+                    done = true
                 }
             }
-           
         }
         
         
@@ -243,6 +248,7 @@ class GameScene: SKScene {
             pauseButton?.position = CGPoint(x:-1000,y:1000)
             swipeLabel?.isHidden = true
             parLabel?.isHidden = true
+            pauseHit = false
         }
         if(gamePaused) {
             if(levelSelectButton?.contains(touch.location(in: self)))! {
@@ -257,6 +263,7 @@ class GameScene: SKScene {
                 resume?.position = CGPoint(x:1000,y:1000)
                 levelSelectButton?.position = CGPoint(x:1000,y:1000)
             }
+            
             if(resume?.contains(touch.location(in: self)))! {
                 print("resume")
                 gamePaused = false
@@ -269,6 +276,7 @@ class GameScene: SKScene {
                 pauseButton?.position = CGPoint(x:0,y:604.965)
                 swipeLabel?.isHidden = false
                 parLabel?.isHidden = false
+                see = true
             }
             
         }
@@ -446,6 +454,7 @@ class GameScene: SKScene {
             numShapes = 2
             yellowTriangle?.position = CGPoint(x: -275, y: 0)
             redSquare?.position = CGPoint(x: 275, y: 0)
+            print("level 1")
         }
         
         //LEVEL 2
@@ -456,6 +465,7 @@ class GameScene: SKScene {
             numShapes = 2
             yellowTriangle?.position = CGPoint(x: 225, y: 530)
             redSquare?.position = CGPoint(x: -225, y: 530)
+            print("level 2")
         }
         
         //LEVEL 3
@@ -472,6 +482,7 @@ class GameScene: SKScene {
             blueDiamond?.isHidden = false
             blueGoal?.isHidden = false
             blueGoalBoy?.isHidden = false
+            print("level 3")
         }
         
         //LEVEL 4
@@ -498,6 +509,7 @@ class GameScene: SKScene {
             redGoalBoy?.position = CGPoint(x: 275,y: -567)
             blueGoal?.position = CGPoint(x:310.358, y:563.838)
             blueGoalBoy?.position = CGPoint(x: 275, y:567)
+            print("level 4")
         }
         
         //LEVEL 5
@@ -529,6 +541,7 @@ class GameScene: SKScene {
             blueGoalBoy?.position = CGPoint(x: 275, y:567)
             purpleGoal?.position = CGPoint(x:-310.358, y:563.838)
             purpleGoalBoy?.position = CGPoint(x: -275, y:567)
+            print("level 5")
         }
         
         //LEVEL 6
@@ -563,6 +576,7 @@ class GameScene: SKScene {
             blueGoalBoy?.position = CGPoint(x: 275, y:567)
             purpleGoal?.position = CGPoint(x:-310.358, y:563.838)
             purpleGoalBoy?.position = CGPoint(x: -275, y:567)
+            print("level 6")
         }
         
         //LEVEL 7
@@ -596,6 +610,7 @@ class GameScene: SKScene {
             redGoalBoy?.position = CGPoint(x:275, y:-567)
             yellowGoal?.position = CGPoint(x:-310.357,y:-600.942)
             yellowGoalBoy?.position = CGPoint (x:-275, y:-567)
+            print("level 7")
             
         }
         
@@ -620,26 +635,28 @@ class GameScene: SKScene {
             blueGoal?.isHidden = false
             blueGoalBoy?.isHidden = false
             blueDiamond?.isHidden = false
+            print("level 8")
         }
         
         //LEVEL 9
         if(LevelSelect.preset == 9) {
             
+            print("level 9")
         }
         
         //LEVEL 10
         if(LevelSelect.preset == 10) {
-            
+            print("level 10")
         }
         
         //LEVEL 11
         if(LevelSelect.preset == 11) {
-            
+            print("level 11")
         }
         
         //LEVEL 12
         if(LevelSelect.preset == 12) {
-            
+            print("level 12")
         }
         parLabel?.text = "par: \(par)"
     }
