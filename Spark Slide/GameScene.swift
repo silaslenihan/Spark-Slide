@@ -76,7 +76,11 @@ class GameScene: SKScene {
     var yellowGoalSlide:Bool = false
     var purpleGoalSlide:Bool = false
     var pauseHit: Bool = true
-    var see: Bool = true
+    var see: Bool = false
+    var redIn:Bool = false
+    var yellowIn:Bool = false
+    var blueIn:Bool = false
+    var purpleIn:Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -172,9 +176,11 @@ class GameScene: SKScene {
     func touchUp(atPoint pos : CGPoint) {
         touchEnd = pos
         
-        if(see == true) {
-            pauseHit = true
+        if((pos.x < 40 && pos.x > -40) && (pos.y > 536.5 && pos.y < 560 )) {
+            pauseHit = false
+            print("success")
         }
+        
         if((gamePaused == false) && (pauseHit)) {
             swipeCount += 1
             move()
@@ -276,7 +282,7 @@ class GameScene: SKScene {
                 pauseButton?.position = CGPoint(x:0,y:604.965)
                 swipeLabel?.isHidden = false
                 parLabel?.isHidden = false
-                see = true
+                pauseHit = true
             }
             
         }
@@ -334,7 +340,21 @@ class GameScene: SKScene {
             goalSlide(goal: purpleGoal!, goalBoy: purpleGoalBoy!)
         }
         
+        if(redIn) {
+            stayIn(node: redSquare!)
+        }
+        if(yellowIn) {
+            stayIn(node: yellowTriangle!)
+        }
+        if(blueIn) {
+            stayIn(node: blueDiamond!)
+        }
+        if(purpleIn) {
+            stayIn(node: purplePentagon!)
+        }
+        stayIn(node: greyCircle!)
     }
+    
     
     //--------------------------------------------------------------------------------
     // slidingWall() - makes the swipeWall node slide from left to right if the
@@ -359,15 +379,15 @@ class GameScene: SKScene {
     
     
     
-    
-    
-    
-    
     //------------------------------------------------------------------------------------
     // levelSetup() - sets up levels and instance data for each level according to
     // LevelSelect.preset
     //------------------------------------------------------------------------------------
     func levelSetup(){
+        redIn = false
+        yellowIn = false
+        blueIn = false
+        purpleIn = false
         greyCircle?.position = CGPoint(x: 0, y: 0)
         print("level setup")
         greyCircle?.isHidden = false
@@ -658,6 +678,20 @@ class GameScene: SKScene {
         if(LevelSelect.preset == 12) {
             print("level 12")
         }
+        
+        if(numShapes == 2) {
+            redIn = true
+            yellowIn = true
+        } else if(numShapes == 3) {
+            redIn = true
+            yellowIn = true
+            blueIn = true
+        } else {
+            redIn = true
+            yellowIn = true
+            blueIn = true
+            purpleIn = true
+        }
         parLabel?.text = "par: \(par)"
     }
     
@@ -690,6 +724,20 @@ class GameScene: SKScene {
         }
         if(Double((goal.position.x)) <= -350.0) {
             goalSlideLeft = true
+        }
+    }
+    
+    func stayIn(node: SKSpriteNode) {
+        if(node.position.x < -360) {
+            node.position.x += 5
+        } else if (node.position.x > 360){
+            node.position.x -= 5
+        }
+        
+        if(node.position.y < -700) {
+            node.position.y += 5
+        } else if (node.position.y > 700){
+            node.position.y -= 5
         }
     }
     
