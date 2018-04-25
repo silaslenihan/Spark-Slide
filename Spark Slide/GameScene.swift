@@ -89,6 +89,7 @@ class GameScene: SKScene {
 
     
     static var myDelegate : backButtonProtocol?
+    static var starDelegate: starUpdateProtocol?
     
     override func didMove(to view: SKView) {
         background = self.childNode(withName: "background") as? SKSpriteNode
@@ -176,16 +177,15 @@ class GameScene: SKScene {
     func touchUp(atPoint pos : CGPoint) {
         touchEnd = pos
         
-        if((pos.x < 40 && pos.x > -40) && (pos.y > 536.5 && pos.y < 560 )) {
-            pauseHit = false
-            print("success")
-        }
+        
         
         if((gamePaused == false) && (pauseHit)) {
             swipeCount += 1
             move()
-            print(pauseHit)
             greyCircle?.physicsBody?.velocity = CGVector(dx: (greyCircle?.anchorPoint.x)!, dy: (greyCircle?.anchorPoint.y)!)
+        }
+        if(pauseHit == false && !gamePaused) {
+            pauseHit = true
         }
     }
     
@@ -214,6 +214,7 @@ class GameScene: SKScene {
         LevelSelect.preset += 1
         swipeCount = -1
         levelSetup()
+        pauseHit = true
     }
     
     
@@ -250,7 +251,6 @@ class GameScene: SKScene {
             resetButton?.position = CGPoint(x:0,y:230)
             resume?.position = CGPoint(x:0, y:30)
             gamePaused = true
-            swipeCount -= 1
             pauseButton?.position = CGPoint(x:-1000,y:1000)
             swipeLabel?.isHidden = true
             parLabel?.isHidden = true
@@ -259,15 +259,17 @@ class GameScene: SKScene {
         if(gamePaused) {
             if(levelSelectButton?.contains(touch.location(in: self)))! {
                 GameScene.myDelegate?.backButton()
+                GameScene.starDelegate?.updateStars()
             }
             if(resetButton?.contains(touch.location(in: self)))! {
                 print("reset")
                 wallTimer.invalidate()
                 levelSetup()
-                swipeCount = -1
                 resetButton?.position = CGPoint(x:1000,y:1000)
                 resume?.position = CGPoint(x:1000,y:1000)
                 levelSelectButton?.position = CGPoint(x:1000,y:1000)
+                pauseHit = true
+                swipeCount = -1
             }
             
             if(resume?.contains(touch.location(in: self)))! {
@@ -282,7 +284,6 @@ class GameScene: SKScene {
                 pauseButton?.position = CGPoint(x:0,y:604.965)
                 swipeLabel?.isHidden = false
                 parLabel?.isHidden = false
-                pauseHit = true
             }
             
         }
@@ -862,6 +863,7 @@ class GameScene: SKScene {
             let oldStars = UserDefaults.standard.integer(forKey: "starsKey")
             UserDefaults.standard.set(oldStars + stars, forKey: "starsKey")
             GameScene.starCount = UserDefaults.standard.integer(forKey: "starsKey")
+            //print(GameScene.starCount)
             stars = 0
             print(swipeCount)
             redSquare?.position = CGPoint(x: 0, y: 0)
@@ -934,5 +936,9 @@ class GameScene: SKScene {
 
 protocol backButtonProtocol {
     func backButton()
+}
+
+protocol starUpdateProtocol {
+    func updateStars()
 }
 
