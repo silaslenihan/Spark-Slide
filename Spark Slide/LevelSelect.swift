@@ -10,18 +10,23 @@ import Foundation
 import UIKit
 
 class LevelSelect: UIViewController, starUpdateProtocol {
+    
+    func updateStars() {
+        print("stars: \(GameScene.starCount)")
+        starsCount.text = "Stars: \(String(GameScene.starCount))"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        GameScene.starDelegate = self
+    }
+    
     static var preset: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
         GameScene.starCount = UserDefaults.standard.integer(forKey: "starsKey")
-        print(GameScene.starCount)
-    }
-   
-    func updateStars() {
-        print("stars: \(GameScene.starCount)")
-        starsCount.text = "Stars: \(String(GameScene.starCount))"
+        updateStars()
     }
     
     @IBAction func levelSelecter(_ sender: UIButton) {
