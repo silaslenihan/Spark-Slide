@@ -86,7 +86,19 @@ class GameScene: SKScene {
     var swipeCount:Int = 0
     var par: Int = 0
     var stars: Int = 0
-
+    
+    var levelOneStars: Int = UserDefaults.standard.integer(forKey: "levelOneStars")
+    var levelTwoStars: Int = UserDefaults.standard.integer(forKey: "levelTwoStars")
+    var levelThreeStars: Int = UserDefaults.standard.integer(forKey: "levelThreeStars")
+    var levelFourStars: Int = UserDefaults.standard.integer(forKey: "levelFourStars")
+    var levelFiveStars: Int = UserDefaults.standard.integer(forKey: "levelFiveStars")
+    var levelSixStars: Int = UserDefaults.standard.integer(forKey: "levelSixStars")
+    var levelSevenStars: Int = UserDefaults.standard.integer(forKey: "levelSevenStars")
+    var levelEightStars: Int = UserDefaults.standard.integer(forKey: "levelEightStars")
+    var levelNineStars: Int = UserDefaults.standard.integer(forKey: "levelNineStars")
+    var levelTenStars: Int = UserDefaults.standard.integer(forKey: "levelTenStars")
+    var levelElevenStars: Int = UserDefaults.standard.integer(forKey: "levelElevenStars")
+    var levelTwelveStars: Int = UserDefaults.standard.integer(forKey: "levelTwelveStars")
     
     static var myDelegate : backButtonProtocol?
     static var starDelegate: starUpdateProtocol?
@@ -160,6 +172,7 @@ class GameScene: SKScene {
         levelSetup()
         
         stars =  UserDefaults.standard.integer(forKey: "starsKey")
+        
     }
     
     struct defaultKeys {
@@ -860,12 +873,13 @@ class GameScene: SKScene {
                 print("zero stars")
             }
             
-            let oldStars = UserDefaults.standard.integer(forKey: "starsKey")
-            UserDefaults.standard.set(oldStars + stars, forKey: "starsKey")
+            starSetter(numStars: stars)
+            
+            //let oldStars = UserDefaults.standard.integer(forKey: "starsKey")
+            //UserDefaults.standard.set(oldStars + stars, forKey: "starsKey")
             GameScene.starCount = UserDefaults.standard.integer(forKey: "starsKey")
             //print(GameScene.starCount)
             stars = 0
-            print(swipeCount)
             redSquare?.position = CGPoint(x: 0, y: 0)
             yellowTriangle?.position = CGPoint(x: 0, y: 0)
             blueDiamond?.position = CGPoint(x: 0, y: 0)
@@ -877,7 +891,60 @@ class GameScene: SKScene {
     }
     
     
-    
+    func starSetter(numStars: Int) {
+        if(UserDefaults.standard.integer(forKey: "starsKey") > 36) {
+           UserDefaults.standard.set(0, forKey: "starsKey")
+        }
+        
+        let starKeyArray = ["levelOneStars","levelTwoStars","levelThreeStars","levelFourStars","levelFiveStars","levelSixStars","levelSevenStars","levelEightStars","levelNineStars","levelTenStars","levelElevenStars","levelTwelveStars"]
+        
+        var starString: String = ""
+        
+        if(LevelSelect.preset == 1) {
+            starString = starKeyArray[1]
+        } else if(LevelSelect.preset == 2) {
+            starString = starKeyArray[2]
+        } else if(LevelSelect.preset == 3) {
+            starString = starKeyArray[3]
+        } else if(LevelSelect.preset == 4) {
+            starString = starKeyArray[4]
+        } else if(LevelSelect.preset == 5) {
+            starString = starKeyArray[5]
+        } else if(LevelSelect.preset == 6) {
+            starString = starKeyArray[6]
+        } else if(LevelSelect.preset == 7) {
+            starString = starKeyArray[7]
+        } else if(LevelSelect.preset == 8) {
+            starString = starKeyArray[8]
+        } else if(LevelSelect.preset == 9) {
+            starString = starKeyArray[9]
+        } else if(LevelSelect.preset == 10) {
+            starString = starKeyArray[10]
+        } else if(LevelSelect.preset == 11) {
+            starString = starKeyArray[11]
+        } else {
+            starString = starKeyArray[12]
+        }
+        
+        for index in 1...3 {
+            print("index: \(index)")
+            let starsForLevel = UserDefaults.standard.integer(forKey: starString)
+            if(starsForLevel == index || starsForLevel == 0)  {
+                if(index < numStars) {
+                    print("set: \(starString), \(numStars)")
+                    UserDefaults.standard.set(numStars, forKey: starString)
+                }
+            }
+        }
+        
+        var total = 0
+        for star in starKeyArray {
+            total += UserDefaults.standard.integer(forKey: star)
+        }
+        print("level1: \(UserDefaults.standard.integer(forKey: "levelOneStars"))")
+        print("total: \(total)")
+        UserDefaults.standard.set(total, forKey: "starsKey")
+    }
     
     
     
