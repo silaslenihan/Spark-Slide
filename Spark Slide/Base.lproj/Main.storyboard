@@ -23,23 +23,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="Sgr-AX-2hO">
-                                <rect key="frame" x="65.5" y="88" width="244" height="492"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFA-qq-oHO">
+                                <rect key="frame" x="4" y="67" width="92" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="53" translatesAutoresizingMaskIntoConstraints="NO" id="Sgr-AX-2hO">
+                                <rect key="frame" x="20.5" y="88" width="334" height="492"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adu-1A-3sB">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
                                         <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="34"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="2op-Dn-kKs">
-                                        <rect key="frame" x="0.0" y="93" width="244" height="42"/>
+                                        <rect key="frame" x="0.0" y="93" width="334" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTW-4L-8Zx">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="YPq-m3-QFy"/>
+                                                    <constraint firstAttribute="height" constant="60" id="gMC-9A-aGD"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="1">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="1" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Ekx-Oj-JZB"/>
@@ -47,10 +57,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-mB-Qsf">
-                                                <rect key="frame" x="107" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="137" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="H43-C5-cN0"/>
+                                                    <constraint firstAttribute="width" constant="60" id="b2c-9r-MYa"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="2">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="2" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="nDz-rB-vd4"/>
@@ -58,10 +72,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zne-GL-xpN">
-                                                <rect key="frame" x="214" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="274" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="7Iz-QG-yd0"/>
+                                                    <constraint firstAttribute="width" constant="60" id="oTv-wq-kJ6"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="3">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="3" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="R2A-4V-wxw"/>
@@ -71,13 +89,17 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="9bt-0j-3Ja">
-                                        <rect key="frame" x="0.0" y="212" width="244" height="42"/>
+                                        <rect key="frame" x="0.0" y="206" width="334" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yag-qt-Da3">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="IXz-hd-Umu"/>
+                                                    <constraint firstAttribute="height" constant="60" id="syp-5L-db1"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="4">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="4" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Ino-eP-ETz"/>
@@ -85,10 +107,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaZ-80-XFe">
-                                                <rect key="frame" x="107" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="137" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="NS3-DE-FoK"/>
+                                                    <constraint firstAttribute="height" constant="60" id="e1y-Ti-rfj"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="5">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="5" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="2ta-pp-Tbt"/>
@@ -96,10 +122,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qx1-fl-nFr">
-                                                <rect key="frame" x="214" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="274" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="BZu-ag-oW9"/>
+                                                    <constraint firstAttribute="height" constant="60" id="S6g-4j-AHA"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="6">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="6" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="Z43-AI-xKg"/>
@@ -109,13 +139,17 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="LJi-W4-hTp">
-                                        <rect key="frame" x="0.0" y="331" width="244" height="42"/>
+                                        <rect key="frame" x="0.0" y="319" width="334" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-wG-HRa">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="6Jm-a4-gPC"/>
+                                                    <constraint firstAttribute="width" constant="60" id="luE-K7-0Hk"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="7">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="7" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="z0j-10-VGa"/>
@@ -123,10 +157,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qn6-za-Llh">
-                                                <rect key="frame" x="107" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="137" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Tll-vO-f2Q"/>
+                                                    <constraint firstAttribute="width" constant="60" id="wX5-QW-Xc5"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="8">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="8" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="jur-cQ-Nf5"/>
@@ -134,10 +172,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVT-1g-Zof">
-                                                <rect key="frame" x="214" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="274" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="VgQ-uO-lmJ"/>
+                                                    <constraint firstAttribute="width" constant="60" id="eHa-uk-Gas"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="9">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="9" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="pmx-O6-rmy"/>
@@ -147,13 +189,17 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="IFB-dg-BSw">
-                                        <rect key="frame" x="0.0" y="450" width="244" height="42"/>
+                                        <rect key="frame" x="0.0" y="432" width="334" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSb-Gc-P2y">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="J61-mF-5de"/>
+                                                    <constraint firstAttribute="width" constant="60" id="sPv-NV-7vX"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="10">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="10" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="IVw-xJ-OwL"/>
@@ -161,10 +207,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cL-3X-iE6">
-                                                <rect key="frame" x="107" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="137" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="APC-kU-1NE"/>
+                                                    <constraint firstAttribute="height" constant="60" id="VNG-V7-yyi"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="11">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="11" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="xcs-EH-8p5"/>
@@ -172,10 +222,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vxa-mH-Xq1">
-                                                <rect key="frame" x="214" y="0.0" width="30" height="42"/>
+                                                <rect key="frame" x="274" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="ONK-Ky-Yc8"/>
+                                                    <constraint firstAttribute="height" constant="60" id="b9K-9O-2N3"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="12">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="12" backgroundImage="red">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="levelSelecter:" destination="HRf-4F-sBL" eventType="touchUpInside" id="AkX-zb-OXE"/>
@@ -186,12 +240,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFA-qq-oHO">
-                                <rect key="frame" x="4" y="67" width="92" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -345,6 +393,7 @@
         <image name="greyCircle" width="2000" height="2000"/>
         <image name="music icon" width="545" height="522"/>
         <image name="purple pentagon" width="99" height="94"/>
+        <image name="red" width="60" height="60"/>
         <image name="red square" width="96" height="92"/>
         <image name="settings_icon" width="512" height="512"/>
         <image name="sound icon" width="453" height="452"/>
@@ -352,6 +401,6 @@
         <image name="yellow circle" width="242" height="229"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VAx-ZR-vdJ"/>
+        <segue reference="xUf-KY-Ow2"/>
     </inferredMetricsTieBreakers>
 </document>

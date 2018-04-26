@@ -18,6 +18,8 @@ class LevelSelect: UIViewController, starUpdateProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         GameScene.starDelegate = self
+        updateStars()
+        levelImageUpdate()
     }
     
     static var preset: Int = 0
@@ -27,6 +29,22 @@ class LevelSelect: UIViewController, starUpdateProtocol {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
         GameScene.starCount = UserDefaults.standard.integer(forKey: "starsKey")
         updateStars()
+    }
+    
+    func levelImageUpdate() {
+        let starKeyArray = ["levelOneStars","levelTwoStars","levelThreeStars","levelFourStars","levelFiveStars","levelSixStars","levelSevenStars","levelEightStars","levelNineStars","levelTenStars","levelElevenStars","levelTwelveStars"]
+        
+        let levelButtonArray = [levelOne,levelTwo,levelThree,levelFour,levelFive,levelSix,levelSeven,levelEight,levelNine,levelTen,levelEleven,levelTwelve]
+        
+        for index in 0...11 {
+            let starAmount = UserDefaults.standard.integer(forKey: starKeyArray[index])
+            if(starAmount == 3) {
+                levelButtonArray[index - 1]?.setBackgroundImage(#imageLiteral(resourceName: "green star"), for: [.normal])
+            } else if(starAmount > 0) {
+                levelButtonArray[index - 1]?.setBackgroundImage(#imageLiteral(resourceName: "green"), for: [.normal])
+                print("did")
+            }
+        }
     }
     
     @IBAction func levelSelecter(_ sender: UIButton) {

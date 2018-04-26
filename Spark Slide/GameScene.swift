@@ -926,16 +926,15 @@ class GameScene: SKScene {
             starString = starKeyArray[12]
         }
         
-        for index in 1...3 {
-            print("index: \(index)")
-            let starsForLevel = UserDefaults.standard.integer(forKey: starString)
-            if(starsForLevel == index || starsForLevel == 0)  {
-                if(index < numStars) {
-                    print("set: \(starString), \(numStars)")
-                    UserDefaults.standard.set(numStars, forKey: starString)
-                }
-            }
+        
+        let starsForLevel = UserDefaults.standard.integer(forKey: starString)
+        
+        if(starsForLevel < numStars) {
+            print("set: \(starString), \(numStars)")
+            UserDefaults.standard.set(numStars, forKey: starString)
         }
+        
+        
         
         var total = 0
         for star in starKeyArray {
