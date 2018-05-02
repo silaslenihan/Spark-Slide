@@ -11,9 +11,16 @@ import UIKit
 
 class LevelSelect: UIViewController, starUpdateProtocol {
     
+     let starKeyArray = ["levelOneStars","levelTwoStars","levelThreeStars","levelFourStars","levelFiveStars","levelSixStars","levelSevenStars","levelEightStars","levelNineStars","levelTenStars","levelElevenStars","levelTwelveStars"]
+    
     func updateStars() {
         print("stars: \(GameScene.starCount)")
-        starsCount.text = "Stars: \(String(GameScene.starCount))"
+                var total = 0
+        for star in starKeyArray {
+            total += UserDefaults.standard.integer(forKey: star)
+        }
+        UserDefaults.standard.set(total,forKey: "starKey")
+        starsCount.text = "Stars: \(String(UserDefaults.standard.integer(forKey: "starKey")))"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,20 +39,25 @@ class LevelSelect: UIViewController, starUpdateProtocol {
     }
     
     func levelImageUpdate() {
-        let starKeyArray = ["levelOneStars","levelTwoStars","levelThreeStars","levelFourStars","levelFiveStars","levelSixStars","levelSevenStars","levelEightStars","levelNineStars","levelTenStars","levelElevenStars","levelTwelveStars"]
-        
         let levelButtonArray = [levelOne,levelTwo,levelThree,levelFour,levelFive,levelSix,levelSeven,levelEight,levelNine,levelTen,levelEleven,levelTwelve]
         
         for index in 0...11 {
             let starAmount = UserDefaults.standard.integer(forKey: starKeyArray[index])
             if(starAmount == 3) {
-                levelButtonArray[index - 1]?.setBackgroundImage(#imageLiteral(resourceName: "green star"), for: [.normal])
+                levelButtonArray[index]?.setBackgroundImage(#imageLiteral(resourceName: "green star"), for: [.normal])
             } else if(starAmount > 0) {
-                levelButtonArray[index - 1]?.setBackgroundImage(#imageLiteral(resourceName: "green"), for: [.normal])
-                print("did")
+                levelButtonArray[index]?.setBackgroundImage(#imageLiteral(resourceName: "green"), for: [.normal])
             }
         }
     }
+    
+    func resetStars() {
+        for star in starKeyArray {
+            UserDefaults.standard.set(0, forKey: star)
+        }
+    }
+    
+    
     
     @IBAction func levelSelecter(_ sender: UIButton) {
     if sender.currentTitle == "1" {

@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 
 class HomeScreen: UIViewController {
-    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"Spark Slide Background")!)
         
     }
+   
 }

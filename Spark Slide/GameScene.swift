@@ -50,6 +50,8 @@ class GameScene: SKScene {
     var barrier2: SKSpriteNode?
     var barrier3: SKSpriteNode?
     var barrier4: SKSpriteNode?
+    var spinnerWall1: SKSpriteNode?
+    var spinnerWall2: SKSpriteNode?
 
     var touchBegan = CGPoint(x: 0.0, y: 0.0)
     var touchEnd = CGPoint(x: 0.0, y: 0.0)
@@ -81,6 +83,7 @@ class GameScene: SKScene {
     var yellowIn:Bool = false
     var blueIn:Bool = false
     var purpleIn:Bool = false
+    var smallSpin: Bool = false
     
     var numShapes:Int = 2
     var swipeCount:Int = 0
@@ -141,6 +144,8 @@ class GameScene: SKScene {
         barrier2 = self.childNode(withName:"barrier2") as? SKSpriteNode
         barrier3 = self.childNode(withName:"barrier3") as? SKSpriteNode
         barrier4 = self.childNode(withName:"barrier4") as? SKSpriteNode
+        spinnerWall1 = self.childNode(withName: "spinnerWall1") as? SKSpriteNode
+        spinnerWall2 = self.childNode(withName: "spinnerWall2") as? SKSpriteNode
         
         greyCircle?.physicsBody = SKPhysicsBody(circleOfRadius: (greyCircle?.size.width)! / 2.0)
         greyCircle?.physicsBody?.affectedByGravity = false
@@ -669,6 +674,8 @@ class GameScene: SKScene {
             blueGoal?.isHidden = false
             blueGoalBoy?.isHidden = false
             blueDiamond?.isHidden = false
+            redSquare?.isHidden = false
+            yellowTriangle?.isHidden = false 
             print("level 8")
         }
         
@@ -871,6 +878,7 @@ class GameScene: SKScene {
             } else {
                 zeroStars?.isHidden = false
                 print("zero stars")
+                stars = 0
             }
             
             starSetter(numStars: stars)
@@ -901,29 +909,29 @@ class GameScene: SKScene {
         var starString: String = ""
         
         if(LevelSelect.preset == 1) {
-            starString = starKeyArray[1]
+            starString = starKeyArray[0]
         } else if(LevelSelect.preset == 2) {
-            starString = starKeyArray[2]
+            starString = starKeyArray[1]
         } else if(LevelSelect.preset == 3) {
-            starString = starKeyArray[3]
+            starString = starKeyArray[2]
         } else if(LevelSelect.preset == 4) {
-            starString = starKeyArray[4]
+            starString = starKeyArray[3]
         } else if(LevelSelect.preset == 5) {
-            starString = starKeyArray[5]
+            starString = starKeyArray[4]
         } else if(LevelSelect.preset == 6) {
-            starString = starKeyArray[6]
+            starString = starKeyArray[5]
         } else if(LevelSelect.preset == 7) {
-            starString = starKeyArray[7]
+            starString = starKeyArray[6]
         } else if(LevelSelect.preset == 8) {
-            starString = starKeyArray[8]
+            starString = starKeyArray[7]
         } else if(LevelSelect.preset == 9) {
-            starString = starKeyArray[9]
+            starString = starKeyArray[8]
         } else if(LevelSelect.preset == 10) {
-            starString = starKeyArray[10]
+            starString = starKeyArray[9]
         } else if(LevelSelect.preset == 11) {
-            starString = starKeyArray[11]
+            starString = starKeyArray[10]
         } else {
-            starString = starKeyArray[12]
+            starString = starKeyArray[11]
         }
         
         
@@ -934,14 +942,11 @@ class GameScene: SKScene {
             UserDefaults.standard.set(numStars, forKey: starString)
         }
         
-        
-        
         var total = 0
         for star in starKeyArray {
             total += UserDefaults.standard.integer(forKey: star)
         }
-        print("level1: \(UserDefaults.standard.integer(forKey: "levelOneStars"))")
-        print("total: \(total)")
+        
         UserDefaults.standard.set(total, forKey: "starsKey")
     }
     
